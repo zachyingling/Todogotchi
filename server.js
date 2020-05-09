@@ -1,5 +1,5 @@
 const express = require("express");
-const session = require("express-sessions");
+const session = require("express-session");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo")(session);
 
@@ -18,11 +18,11 @@ app.use(express.urlencoded({extended: true}));
 
 const sessionStore = new MongoStore({
   mongooseConnection: connection,
-  collection: "Users"
+  collection: "sessions"
 });
 
 app.use(session({
-  secret: "idk what this is",
+  secret: "some secret",
   resave: false, 
   saveUninitialized: true,
   store: sessionStore,
