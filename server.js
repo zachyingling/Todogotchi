@@ -2,6 +2,7 @@ const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo")(session);
+const validator = require("email-validator");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const logger = require("morgan");
@@ -47,9 +48,14 @@ app.get("/", (req, res) => {
 app.post("/create/:email/:password", (req, res) => {
   sess = req.session;
 
-  // \/  Do a db search for req.body.email and req.body.password if its created yet. then create
+  // \/  Do a db search for req.params.email and req.params.password if its created yet; if email is in db res.send(false) else create account
   sess.email = req.params.email;
   sess.password = req.params.password;
+
+  // \/ this validates email (returns true if its an email else returns false if not valid email)
+  // if(validator.validate(req.params.email)) {
+
+  // } else {}
 
   res.end();
 });
