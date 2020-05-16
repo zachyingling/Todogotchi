@@ -1,4 +1,5 @@
 import React from "react";
+import Axios from "axios";
 
 class CreateAccountForm extends React.Component {
   state = {
@@ -16,6 +17,16 @@ class CreateAccountForm extends React.Component {
   };
 
   handleSubmit = () => {
+    Axios.post("/create/" + this.state.email + "/" + this.state.password)
+      .then(response => {
+        console.log(response);
+        // Might not need this \/
+        // this.setState({
+        //   email: "",
+        //   password: ""
+        // });
+      })
+      .catch(err => console.log(err));
   };
 
   handlePassword = event => {
