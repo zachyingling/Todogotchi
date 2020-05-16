@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
+import CreateAccountForm from "../CreateAccountForm/CreateAccountForm";
 
 function CreateAccount () {
   const [show, setShow] = React.useState(false);
@@ -15,15 +16,14 @@ function CreateAccount () {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Create Account</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          <CreateAccountForm />
+        </Modal.Body>
         <Modal.Footer>
           <button variant="secondary" onClick={handleClose}>
             Close
-          </button>
-          <button variant="primary" onClick={handleClose}>
-            Save Changes
           </button>
         </Modal.Footer>
       </Modal>
