@@ -11,7 +11,7 @@ function CreateAccount () {
   return (
     <>
       <button variant="primary" onClick={handleShow}>
-        Launch demo modal
+        Create Account
       </button>
 
       <Modal show={show} onHide={handleClose}>
