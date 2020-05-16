@@ -2,9 +2,9 @@ const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo")(session);
-
-var app = express();
+const app = express();
 const PORT = process.env.PORT || 3001;
+let sess;
 
 const dbString = process.env.MONGODB_URI || "mongodb://localhost/todo_db";
 const dbOptions = {
@@ -23,8 +23,8 @@ const sessionStore = new MongoStore({
 
 app.use(session({
   secret: "some secret",
-  resave: false, 
-  saveUninitialized: true,
+  resave: false, // false making it so the session is saved to MongoStore whenever the req.session is modified
+  saveUninitialized: false, // false making it so the session is saved to db whenever the req.session is modified
   store: sessionStore,
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 // Equals 1 day in milliseconds
@@ -33,25 +33,45 @@ app.use(session({
 
 app.get("/", (req, res) => {
   // Start session here
-  res.end();
+  sess = req.session;
+
+  if(sess.email){
+    res.send(true); // tells the react router to route to /home route
+  } else {
+    res.send(false); // tells the react router to route to / route with err message
+  }
 });
 
 app.post("/create", (req, res) => {
-  // We can setup this route to make a new account; tests to see if the username/email exists in the database; if the username/email doesn't exist create account else tell user that you can't use username/email
+  sess = req.session;
+
+  // \/  Do a db search for req.body.email and req.body.password if its created yet. then create
+  sess.email = req.body.email;
+  sess.password = req.body.password;
+
+  res.end();
 });
 
 app.post("/login", (req, res) => {
   // We can setup this route to make a call to the database to see if the username and password exists, then if it exists login and start the session;
+  sess = req.session;
+
+  if(sess.email && sess.password) {
+    res.send(true);
+  } else {
+    res.send(false);
+  }
 });
 
 app.post("/logout", (req, res) => {
   // Post route destroys the session connection
-  req.session.destroy((err) => {
+  sess = req.session;
+  sess.destroy((err) => {
     if (err) {
       return res.send(false);
     }
-    res.clearCookie("project2");
-    res.send(true);
+    res.clearCookie();
+    return res.send(true);
   });
 });
 
