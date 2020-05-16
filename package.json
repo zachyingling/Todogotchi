@@ -31,7 +31,8 @@
     "express": "^4.17.1",
     "express-session": "^1.0.6",
     "if-env": "^1.0.4",
-    "mongoose": "^5.9.13"
+    "mongoose": "^5.9.13",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
