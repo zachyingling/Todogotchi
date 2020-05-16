@@ -21,10 +21,17 @@ class Login extends React.Component {
     });
   };
   
-  handleFormSubmit = event => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
+  handlePassword = event => {
     event.preventDefault();
-    
+    if(this.state.password.length < 8){
+      alert("Password needs to be 8 characters");
+    } else {
+      this.handleFormSubmit();
+    }
+  };
+
+  handleFormSubmit = () => {
+    // Preventing the default behavior of the form submit (which is to refresh the page)
     Axios.post("/login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
       console.log(axiosResponse);
       this.setState({
@@ -59,7 +66,7 @@ class Login extends React.Component {
             minLength="8"
             required
           />
-          <input type="submit" onClick={this.handleFormSubmit} value="Submit" />
+          <input type="submit" onClick={this.handlePassword} value="Submit" />
         </form>
         <CreateAccountButton />
       </div>
