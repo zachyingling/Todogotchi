@@ -4,19 +4,19 @@ const Schema = mongoose.Schema;
 
 const PetSchema = new Schema({
     userId: {
-        type: int
+        type: Number
     },
     creatureId: {
         type: String
     },
     moodStatus: {
-        type: int
+        type: Number
     },
     energyLevel: {
-        type: int
+        type: Number
     },
     lastStatusChange: {
-        type: timestamp
+        type: Date
     }
 });
 const Pet = mongoose.model("Pet", PetSchema);
