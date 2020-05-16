@@ -2,8 +2,10 @@ const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo")(session);
+const validator = require("email-validator");
 const app = express();
 const PORT = process.env.PORT || 3001;
+const logger = require("morgan");
 let sess;
 
 const dbString = process.env.MONGODB_URI || "mongodb://localhost/todo_db";
@@ -15,6 +17,7 @@ const connection = mongoose.createConnection(dbString, dbOptions);
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(logger("dev"));
 
 const sessionStore = new MongoStore({
   mongooseConnection: connection,
@@ -42,25 +45,38 @@ app.get("/", (req, res) => {
   }
 });
 
-app.post("/create", (req, res) => {
+app.post("/create/:email/:password", (req, res) => {
   sess = req.session;
 
-  // \/  Do a db search for req.body.email and req.body.password if its created yet. then create
-  sess.email = req.body.email;
-  sess.password = req.body.password;
+  // \/  Do a db search for req.params.email and req.params.password if its created yet; if email is in db res.send(false) else create account
+  sess.email = req.params.email;
+  sess.password = req.params.password;
+
+  // \/ this validates email (returns true if its an email else returns false if not valid email)
+  // if(validator.validate(req.params.email)) {
+
+  // } else {}
 
   res.end();
 });
 
-app.post("/login", (req, res) => {
+app.post("/login/:email/:password", (req, res) => {
   // We can setup this route to make a call to the database to see if the username and password exists, then if it exists login and start the session;
   sess = req.session;
 
-  if(sess.email && sess.password) {
-    res.send(true);
-  } else {
-    res.send(false);
-  }
+  // db.User.find({ email: req.params.email }, { password: req.params.password })
+  //   .then(response => {
+  //     // Idk what response is going to be. we can figure this out whenever we setup the database
+  //     console.log(response);
+  //     // We need to make a Conditional if account found set email & password to sess Object then res.send(true); else account not found res.send(false); \/ this does nothing yet
+  //     // if(sess.email && sess.password) {
+  //     //   res.send(true);
+  //     // } else {
+  //     //   res.send(false);
+  //     // }
+  //   })
+  //   .catch(err => console.log(err));
+  res.end();
 });
 
 app.post("/logout", (req, res) => {
