@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const ToDoSchema = new Schema({
   userId: {
-  	type: Int
+  	type: Number
   }, 
   listItem: {
   	type: String
@@ -13,7 +13,7 @@ const ToDoSchema = new Schema({
     type: Boolean
   },
   lastUpdated: {
-      type: timestamp
+      type: Date
   }
 });
 const ToDoList = mongoose.model("ToDoList", ToDoSchema);

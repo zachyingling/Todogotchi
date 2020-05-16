@@ -41,7 +41,7 @@ class CreateAccountForm extends React.Component {
   render() {
     return (
       <form className="form">
-        <label for="email">Email:</label>
+        <label htmlFor="email">Email:</label>
         <input
           value={this.state.email}
           name="email"
@@ -50,7 +50,7 @@ class CreateAccountForm extends React.Component {
           type="text"
           placeholder="Email"
         />
-        <label for="password">Password(minimum 8 characters):</label>
+        <label htmlFor="password">Password(minimum 8 characters):</label>
         <input
           value={this.state.password}
           name="password"
