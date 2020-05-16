@@ -46,7 +46,7 @@ class Login extends React.Component {
       <div className="container">
         <h1 className="text-center">Please Login</h1>
         <form className="form">
-          <label for="email">Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             value={this.state.email}
             name="email"
@@ -55,7 +55,7 @@ class Login extends React.Component {
             type="text"
             placeholder="Email"
           />
-          <label for="password">Password(minimum 8 characters):</label>
+          <label htmlFor="password">Password(minimum 8 characters):</label>
           <input
             value={this.state.password}
             name="password"
