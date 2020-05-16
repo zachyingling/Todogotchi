@@ -18,8 +18,6 @@ class PetWindow extends Component {
         
     };
 
-
-
     // sets correct image according to happiness level
     getAnimationState() {
         if (this.state.happiness > 8) {
@@ -48,18 +46,25 @@ class PetWindow extends Component {
       }
 
     // will track when energy is earned
-    handleIncrement = () => {
+    incrementEnergy = () => {
         this.setState({ energy: this.state.energy + 4 });
         // post new energy stat to database
         console.log("Energy has increased to: " + this.state.energy);
     };
     
     // will track consumption of energy
-    handleDecrement = () => {
+    decrementEnergy = () => {
         this.setState({ energy: this.state.energy - 1 });
         // post new energy stat to database
         console.log("Energy has decreased to: " + this.state.energy);
     }
+
+    // will increase pet's happiness when user plays with it/pets it
+    incrementHappiness = () => {
+        this.setState({ happiness: this.state.happiness + 1 });
+        // post new happiness stat to database
+        console.log("Happiness has increased to: " + this.state.happiness);
+    };
     
     
     render() {
@@ -76,13 +81,17 @@ class PetWindow extends Component {
                         <img src={this.state.imgSrc} alt="Pet Gif" />
                     </Col>
                     <Col size="md-6">
-                        <button className="btn btn-primary" onClick={this.handleIncrement}>
+                        <button className="btn btn-primary" onClick={this.incrementEnergy}>
                             Add 4 Energy
                         </button>
                     </Col>
                     <Col size="md-6">
-                        <button className="btn btn-danger" onClick={this.handleDecrement}>
-                            Subtract 1 Energy
+                        <button className="btn btn-success"
+                              onClick={() => {
+                                this.decrementEnergy();
+                                this.incrementHappiness();
+                              }}>
+                            Play/Pet
                         </button>
                     </Col>
                 </Row>
