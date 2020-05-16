@@ -1,6 +1,6 @@
 import React from "react";
 import Axios from "axios";
-import CreateAccountButton from "../../CreateAccountButton/CreateAccountButton";
+import CreateAccount from "../../CreateAccount/CreateAccount";
 // css imported from elsewhere not necissariyl from Login folder
 
 // this is our 'first' page that shows a log in/register feature
@@ -68,7 +68,7 @@ class Login extends React.Component {
           />
           <input type="submit" onClick={this.handlePassword} value="Submit" />
         </form>
-        <CreateAccountButton />
+        <CreateAccount />
       </div>
     );
   }
