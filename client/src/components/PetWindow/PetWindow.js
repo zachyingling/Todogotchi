@@ -1,9 +1,13 @@
 import React, { Component }  from "react";
 // import "../PetWindow/Petwindow.css";
-import "../Sprite/Sprite";
+import {
+    CircularProgressbar,
+    CircularProgressbarWithChildren,
+    buildStyles
+  } from "react-circular-progressbar";
+import 'react-circular-progressbar/dist/styles.css';
 import { Col, Row, Container } from "../Grid";
 import Jumbotron from "../Jumbotron";
-
 import happy from "../../images/sprites/phoebe-affection-happy.gif";
 import meh from "../../images/sprites/phoebe-meh-4fps.gif";
 import pissy from "../../images/sprites/phoebe-pissy.gif";
@@ -14,8 +18,8 @@ class PetWindow extends Component {
         // should pull initial values from database, setting manually for now
         happiness: 12,
         energy: 8,
-        imgSrc: happy
-        
+        imgSrc: happy,
+        happinessPercent: 100
     };
 
     // sets correct image according to happiness level
@@ -35,6 +39,7 @@ class PetWindow extends Component {
         this.interval = setInterval(() => {
             this.setState({ happiness: this.state.happiness - 1});
             this.getAnimationState();
+            this.setState({ happinessPercent: this.state.happiness * 100 / 12});
             // post new happiness stat to database
             console.log("Happiness has decreased to: " + this.state.happiness);
         }, 2000);
@@ -94,27 +99,23 @@ class PetWindow extends Component {
                             Play/Pet
                         </button>
                     </Col>
+                    <Col size="md-4">
+                        <CircularProgressbar
+                            value={this.state.happinessPercent}
+                            minvalue={0}
+                            maxvalue={12}
+                            counterClockwise={true}
+                            strokeWidth={50}
+                            styles={buildStyles({
+                            strokeLinecap: "butt"
+                                })}
+                        />
+                    </Col>
                 </Row>
             </Container>
         );
     }
 
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
 
 export default PetWindow;
