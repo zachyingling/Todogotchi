@@ -62,16 +62,26 @@ class PetWindow extends Component {
     
     // will track consumption of energy
     decrementEnergy = () => {
-        this.setState({ energy: this.state.energy - 1 });
-        // post new energy stat to database
-        console.log("Energy has decreased to: " + this.state.energy);
-    }
+        if (this.state.energy > 0) {
+            this.setState({ energy: this.state.energy - 1 });
+            // post new energy stat to database
+            console.log("Energy has decreased to: " + this.state.energy);
+        } else {
+            console.log("Energy is already fully depleted. Proof: " + this.state.energy)
+        }
+    };
 
     // will increase pet's happiness when user plays with it/pets it
     incrementHappiness = () => {
-        this.setState({ happiness: this.state.happiness + 1 });
-        // post new happiness stat to database
-        console.log("Happiness has increased to: " + this.state.happiness);
+        if (this.state.happiness < 12) {
+            this.setState({ happiness: this.state.happiness + 1 });
+            // post new happiness stat to database
+            console.log("Happiness has increased to: " + this.state.happiness);
+        } else {
+            console.log("Pet's health is already full. Proof: " + this.state.happiness)
+            // should maybe alert player that pet's happiness is full
+        }
+
     };
     
     
