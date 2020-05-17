@@ -11,6 +11,7 @@ import Jumbotron from "../Jumbotron";
 import happy from "../../images/sprites/phoebe-affection-happy.gif";
 import meh from "../../images/sprites/phoebe-meh-4fps.gif";
 import pissy from "../../images/sprites/phoebe-pissy.gif";
+import sad from "../../images/sprites/phoebe-sad.gif";
 
 
 class PetWindow extends Component {
@@ -22,14 +23,16 @@ class PetWindow extends Component {
         happinessPercent: 100
     };
 
-    // sets correct image according to happiness level
+    // sets appropriate image according to happiness level
     getAnimationState() {
-        if (this.state.happiness > 8) {
+        if (this.state.happiness > 9) {
             this.setState({ imgSrc: happy})
-        } else if (this.state.happiness > 4) {
+        } else if (this.state.happiness > 6) {
             this.setState({ imgSrc: meh})
-        } else {
+        } else if (this.state.happiness > 3) {
             this.setState({imgSrc: pissy})
+        } else {
+            this.setState({imgSrc: sad})
         }
     };
 
