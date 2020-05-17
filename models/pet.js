@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
-const PetSchema = new Schema({
+var PetSchema = new Schema({
     userId: {
         type: Number
     },
@@ -19,6 +18,6 @@ const PetSchema = new Schema({
         type: Date
     }
 });
-const Pet = mongoose.model("Pet", PetSchema);
+var Pet = mongoose.model("Pet", PetSchema);
 
 module.exports = Pet;
