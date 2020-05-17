@@ -1,5 +1,6 @@
 import React from "react";
 import PetWindow from "../../PetWindow/PetWindow";
+// import TodoList from "../../TodoList/TodoList";
 
 
 // can import css from elsewhere, 
@@ -16,7 +17,15 @@ class Home extends React.Component {
         return(
           <div className="container">
             <PetWindow />
+            
           </div>
+          
+          
+        //   <div className="container">
+        //   <TodoList />
+          
+        // </div>
+          
         );
       }
 
