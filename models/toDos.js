@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
-const ToDoSchema = new Schema({
+var ToDoSchema = new Schema({
   userId: {
   	type: Number
   }, 
@@ -16,6 +15,6 @@ const ToDoSchema = new Schema({
       type: Date
   }
 });
-const ToDoList = mongoose.model("ToDoList", ToDoSchema);
+var ToDoList = mongoose.model("ToDoList", ToDoSchema);
 
 module.exports = ToDoList;
