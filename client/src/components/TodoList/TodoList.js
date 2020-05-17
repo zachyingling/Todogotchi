@@ -21,7 +21,29 @@ import React from "react";
 // Class 
 
 export default class TodoList extends React.Component {
+    
+    state = {
+        todos: []
+
+    };
+    
+    addTodo = (todo) => {
+        // this.state.todo.push(todo);//this mutates teh state
+        // const newTodos = [todo, ...this.state.todos]; //... makes copy of array
+        
+        this.setState({
+            todos: [todo, ...this.state.todos]
+        });
+    };
+    
     render() {
-        return <div><TodoForm /></div>;
-    }
+        return (
+        <div>
+            <TodoForm onSubmit= {this.addTodo} />
+            </div>
+        );    
 }
+}
+
+
+// export default TodoList;
