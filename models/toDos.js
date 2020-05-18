@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const ToDoSchema = new Schema({
+const toDoSchema = new Schema({
   userId: {
     type: Number,
     required: true
@@ -18,6 +18,6 @@ const ToDoSchema = new Schema({
       required: true
   }
 });
-const ToDoList = mongoose.model("ToDoList", ToDoSchema);
+const ToDoList = mongoose.model("ToDoList", toDoSchema);
 
 module.exports = ToDoList;
