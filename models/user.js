@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-var UserSchema = new Schema({
+const UserSchema = new Schema({
+  _userId:{
+    type: Number,
+    required: true,
+    unique: true
+  },
   email: {
     type: String,
     unique: true
@@ -11,10 +16,13 @@ var UserSchema = new Schema({
   },
   login: {
     type: Date,
-    default: Date.now
+    //formerly date.now, is this change oK???
+    // default: Date.now,
+    timestamps: true,
+    required: true
   }
 });
 
-var User = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
 module.exports = User;
