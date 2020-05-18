@@ -41,7 +41,7 @@ export default class TodoList extends React.Component {
     };
     toggleComplete= (id) => {
         this.setState({
-            todos: state.todos.map(todo => {
+            todos: this.state.todos.map(todo => {
                 // should update todos
                 if (todo.id === id) {
                     return {
@@ -64,11 +64,12 @@ export default class TodoList extends React.Component {
         });
     };
 
-    handleDeleteTodo = ud => {
-        this.setState(state => ({
-            todos: state.todos.filter(todo => todo.id !==id)
-        }));
-    };
+    // handleDeleteTodo = ud => {
+    //     this.setState(state => ({
+    //         todos: state.todos.filter(todo => todo.id !==id)
+    //     }));
+    // };  
+    //this appears to break react page
 
     removeAllTodosThatAreChecked = () => {
         this.setState(state => ({
@@ -90,6 +91,7 @@ export default class TodoList extends React.Component {
 
         return (
         <div>
+           
         <div>
             <TodoForm onSubmit= {this.addTodo} />
             {todos.map(todo => (
@@ -106,10 +108,21 @@ export default class TodoList extends React.Component {
         todos left: {this.state.todos.filter(todo => !todo.complete).length}
         </div>
         <div>
+        
          <button onClick={() => this.updateTodoToShow("all")}>all</button>
          <button onClick={() => this.updateTodoToShow("active")}>
           active
         </button>
+        {/* <button onClick={window.open('targetWindow',
+                                   `toolbar=no,
+                                    location=no,
+                                    status=no,
+                                    menubar=no,
+                                    scrollbars=yes,
+                                    resizable=yes,
+                                    width=SomeSize,
+                                    height=SomeSize`)
+            }>MINI Game</button> */}
         <button onClick={() => this.updateTodoToShow("complete")}>
           complete
          </button>
@@ -146,4 +159,4 @@ export default class TodoList extends React.Component {
 
 
 
-export default TodoList;
+// export default TodoList;
