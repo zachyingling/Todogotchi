@@ -12,6 +12,7 @@ import happy from "../../images/sprites/phoebe-affection-happy.gif";
 import meh from "../../images/sprites/phoebe-meh-4fps.gif";
 import pissy from "../../images/sprites/phoebe-pissy.gif";
 import sad from "../../images/sprites/phoebe-sad.gif";
+import API from "../utils/API";
 
 
 class PetWindow extends Component {
@@ -38,6 +39,9 @@ class PetWindow extends Component {
 
     componentDidMount() {
         // this will likely need to have some kind of .then function - get current state from database, .then load database stat values accordingly. otherwise it will reflect default state set above and then switch.
+
+        // get current happiness and energy stats from the database. 
+        // this.loadStats();
         
         this.interval = setInterval(() => {
             this.setState({ happiness: this.state.happiness - 1});
@@ -53,18 +57,41 @@ class PetWindow extends Component {
         clearInterval(this.interval);
       }
 
-    // will track when energy is earned
+      // load user's current energy and happiness stats from database. may need to pass user's id or something, also not sure about data passed in this.setState
+    //   loadStats = () => {
+    //       API.getStats()
+    //       .then(res =>
+    //         this.setState({ happiness: res.happiness, energy: res.energy })
+    //         )
+    //         .catch( err => console.log(err));
+    //   };
+
+
+
+
+    // will track when energy is earned and update energy stat in database. this will likely live on the todo component once configured
     incrementEnergy = () => {
         this.setState({ energy: this.state.energy + 4 });
+
         // post new energy stat to database
+        // API.saveEnergy({ energy: this.state.energy})
+        //     .then(res => this.loadStats())
+        //     .catch(err => console.log(err));
+    
+
         console.log("Energy has increased to: " + this.state.energy);
     };
     
-    // will track consumption of energy
+    // will track consumption of energy and update energy stat in database. will likely live in todo copmonent
     decrementEnergy = () => {
         if (this.state.energy > 0) {
             this.setState({ energy: this.state.energy - 1 });
-            // post new energy stat to database
+
+            // post new energy stat to database. unsure if passing correct data
+            // API.saveEnergy({ energy: this.state.energy})
+            //     .then(res => this.loadStats())
+            //     .catch(err => console.log(err));
+
             console.log("Energy has decreased to: " + this.state.energy);
         } else {
             console.log("Energy is already fully depleted. Proof: " + this.state.energy)
@@ -75,7 +102,12 @@ class PetWindow extends Component {
     incrementHappiness = () => {
         if (this.state.happiness < 12) {
             this.setState({ happiness: this.state.happiness + 1 });
-            // post new happiness stat to database
+
+            // post new happiness stat to database. unsure if passing correct data
+            // API.saveHappiness({ happiness: this.state.happiness })
+            //     .then(res => this.loadStats())
+            //     .catch(err => console.log(err));
+
             console.log("Happiness has increased to: " + this.state.happiness);
         } else {
             console.log("Pet's health is already full. Proof: " + this.state.happiness)
