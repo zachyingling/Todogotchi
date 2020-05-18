@@ -14,8 +14,7 @@ const toDoSchema = new Schema({
   },
   lastUpdated: {
       type: Date,
-      timestamps: true,
-      required: true
+      timestamps: true
   }
 });
 const ToDoList = mongoose.model("ToDoList", toDoSchema);

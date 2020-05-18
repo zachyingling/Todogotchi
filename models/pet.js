@@ -4,12 +4,10 @@ const Schema = mongoose.Schema;
 const petSchema = new Schema({
     userId: {
         type: Number,
-        required: true,
-        foreignKey: ""
+        required: true
     },
     creatureId: {
-        type: String,
-        required: true,
+        type: Number,
         unique: true
     },
     moodStatus: {
@@ -24,13 +22,10 @@ const petSchema = new Schema({
     },
     lastStatusChange: {
         type: Date,
-        timestamps: true, 
-        required: true
+        timestamps: true
     }
 });
 const Pet = mongoose.model("Pet", petSchema);
-//USE THIS??
-// Pet.belongsTo(User, {foreignKey: 'userId'});
 
 module.exports = Pet;
 
