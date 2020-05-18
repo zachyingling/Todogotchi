@@ -32,9 +32,12 @@
     "express": "^4.17.1",
     "express-session": "^1.0.6",
     "if-env": "^1.0.4",
-    "mongoose": "^5.9.13",
+    "mongodb": "^3.5.7",
+    "mongoose": "^5.9.14",
     "morgan": "^1.10.0",
-    "react-game-kit": "^1.0.6"
+    "react-circular-progressbar": "^2.0.3",
+    "react-game-kit": "^1.0.6",
+    "shortid": "^2.2.15"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

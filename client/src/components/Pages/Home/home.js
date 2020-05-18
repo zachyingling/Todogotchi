@@ -1,4 +1,7 @@
-
+import React from "react";
+import PetWindow from "../../PetWindow/PetWindow";
+import TodoList from "../../TodoList/TodoList"; 
+import TodoForm from "../../TodoList/TodoForm"; //sint' currently working
 
 
 // can import css from elsewhere, 
@@ -9,4 +12,30 @@
 // showing health meter/happiness meter/hunger? of pet
 // when happyness (or hunger?) level is sated it triggers a happiness event, (access to a minigame) which returns a change to the pet (increased happy, etc
 
+class Home extends React.Component {
 
+    render() {
+        return(
+          <div>
+          <div className="container">
+            <PetWindow />
+            </div>
+          
+          
+          <div className="container">
+           <TodoList />
+          
+        </div>
+        
+        
+        </div>
+        );
+      }
+
+
+
+
+
+}
+
+export default Home;
