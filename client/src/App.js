@@ -6,7 +6,7 @@ import Home from "./components/Pages/Home/Home";
 function App() {
   return (
     <div className="wrapper">
-      <Login />
+      {/* <Login /> */}
       <Home />
     </div>
   );

@@ -1,4 +1,5 @@
-// Exporting an object containing all of our models
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 module.exports = {
   User: require("./user"),

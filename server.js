@@ -94,3 +94,27 @@ app.post("/logout", (req, res) => {
 app.listen(PORT, () => {
   console.log("Listening at:  localhost:" + PORT);
 });
+
+// //this should be where we set a timer to refresh the database 
+// router.post('/updateData', (req, res) => {
+//   const { id, update } = req.body;
+//   Data.findByIdAndUpdate(id, update, (err) => {
+//     if (err) return res.json({ success: false, error: err });
+//     return res.json({ success: true });
+//   });
+// });
+
+// // this is our create methid
+// // this method adds new data in our database
+// router.post('/putData', (req, res) => {
+//   let data = new Data();
+
+//   const { id, message } = req.body;
+
+//   if ((!id && id !== 0) || !message) {
+//     return res.json({
+//       success: false,
+//       error: 'INVALID INPUTS',
+//     });
+//   }
+// })
