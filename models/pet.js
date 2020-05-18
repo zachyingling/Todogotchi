@@ -1,15 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const PetSchema = new Schema({
+const petSchema = new Schema({
     userId: {
         type: Number,
-        required: true,
-        foreignKey: ""
+        required: true
     },
     creatureId: {
-        type: String,
-        required: true,
+        type: Number,
         unique: true
     },
     moodStatus: {
@@ -24,13 +22,10 @@ const PetSchema = new Schema({
     },
     lastStatusChange: {
         type: Date,
-        timestamps: true, 
-        required: true
+        timestamps: true
     }
 });
-const Pet = mongoose.model("Pet", PetSchema);
-//USE THIS??
-// Pet.belongsTo(User, {foreignKey: 'userId'});
+const Pet = mongoose.model("Pet", petSchema);
 
 module.exports = Pet;
 
