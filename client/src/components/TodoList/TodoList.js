@@ -41,7 +41,7 @@ export default class TodoList extends React.Component {
     };
     toggleComplete= (id) => {
         this.setState({
-            todos: state.todos.map(todo => {
+            todos: this.state.todos.map(todo => {
                 // should update todos
                 if (todo.id === id) {
                     return {
@@ -64,11 +64,12 @@ export default class TodoList extends React.Component {
         });
     };
 
-    handleDeleteTodo = ud => {
-        this.setState(state => ({
-            todos: state.todos.filter(todo => todo.id !==id)
-        }));
-    };
+    // handleDeleteTodo = ud => {
+    //     this.setState(state => ({
+    //         todos: state.todos.filter(todo => todo.id !==id)
+    //     }));
+    // };  
+    //this appears to break react page
 
     removeAllTodosThatAreChecked = () => {
         this.setState(state => ({
@@ -146,4 +147,4 @@ export default class TodoList extends React.Component {
 
 
 
-export default TodoList;
+// export default TodoList;

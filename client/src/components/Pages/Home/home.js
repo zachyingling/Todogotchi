@@ -16,16 +16,16 @@ class Home extends React.Component {
 
     render() {
         return(
-          <div className="container">
-            <PetWindow />
+          // <div className="container">
+          //   <PetWindow />
             
-          </div>
+          // </div>
           
           
-        //   <div className="container">
-        //    <TodoList />
+          <div className="container">
+           <TodoList />
           
-        // </div>
+        </div>
           
         );
       }
