@@ -64,11 +64,11 @@ export default class TodoList extends React.Component {
         });
     };
 
-    // handleDeleteTodo = ud => {
-    //     this.setState(state => ({
-    //         todos: state.todos.filter(todo => todo.id !==id)
-    //     }));
-    // };  
+    handleDeleteTodo = id => {
+        this.setState(state => ({
+            todos: state.todos.filter(todo => todo.id !==id)
+        }));
+    };  
     //this appears to break react page
 
     removeAllTodosThatAreChecked = () => {
