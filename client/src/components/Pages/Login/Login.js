@@ -33,11 +33,16 @@ class Login extends React.Component {
   handleFormSubmit = () => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     return Axios.post("/login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
-      console.log(axiosResponse);
-      this.setState({
-        email: "",
-        password: ""
-      });
+      console.log(axiosResponse.data);
+      if(axiosResponse.data === "not found"){
+        alert("Account not found.");
+      } else {
+        // Reroute on react router here
+        this.setState({
+          email: "",
+          password: ""
+        });
+      }
     }).catch(err => console.log(err));
   };
 
