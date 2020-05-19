@@ -91,8 +91,25 @@ export default class TodoList extends React.Component {
 
         return (
         <div>
-           
+            <div>
+                {/* minigame area */}
+                {/* <a href="https://benmulhollandpsl.github.io/todogotfree/"" */}
+
+        <button onClick={()=>window.open("https://benmulhollandpsl.github.io/todogotfree/", 'targetWindow',
+                                    `status=no,
+                                    menubar=no,
+                                    width=550,
+                                    height=550`)
+            }>MINI Game event</button>
+            {/* return false;"Popup link</a>" */}
+                </div>
+
+
         <div>
+
+                
+
+
             <TodoForm onSubmit= {this.addTodo} />
             {todos.map(todo => (
                 <Todo
@@ -113,16 +130,7 @@ export default class TodoList extends React.Component {
          <button onClick={() => this.updateTodoToShow("active")}>
           active
         </button>
-        {/* <button onClick={window.open('targetWindow',
-                                   `toolbar=no,
-                                    location=no,
-                                    status=no,
-                                    menubar=no,
-                                    scrollbars=yes,
-                                    resizable=yes,
-                                    width=SomeSize,
-                                    height=SomeSize`)
-            }>MINI Game</button> */}
+        
         <button onClick={() => this.updateTodoToShow("complete")}>
           complete
          </button>
