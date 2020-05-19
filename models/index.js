@@ -1,8 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
 module.exports = {
-  User: require("./user"),
+  User: require("./User"),
   ToDoList: require("./toDos"),
   Pet: require("./pet")
 };

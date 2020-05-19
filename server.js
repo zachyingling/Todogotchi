@@ -8,16 +8,17 @@ const PORT = process.env.PORT || 3001;
 const logger = require("morgan");
 const db = require("./models");
 let sess;
-const db = require("./models");
-//dbString
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/todo_db";
-mongoose.connect(MONGODB_URI);
-mongoose.Promise = Promise;
 
 const dbOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true
 };
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/todo_db";
+
+mongoose.connect(MONGODB_URI, dbOptions);
+mongoose.Promise = Promise;
+
+//dbString
 const connection = mongoose.createConnection(MONGODB_URI, dbOptions);
 
 app.use(express.json());
@@ -39,6 +40,16 @@ app.use(session({
   }
 }));
 
+
+// \/ These create something in the collections but pets is there with nothing
+// db.User.create({password: "test", email: "test"}).then(response=> {
+//   console.log(response);
+// }).catch(err => console.log(err));
+
+// db.ToDoList.create({userId: "129831"}).then(response=> {
+//   console.log(response);
+// }).catch(err => console.log(err));
+
 app.get("/", (req, res) => {
   // Start session here
   sess = req.session;
@@ -53,15 +64,15 @@ app.get("/", (req, res) => {
 app.post("/create/:email/:password", (req, res) => {
   sess = req.session;
 
-  // \/  Do a db search for req.params.email and req.params.password if its created yet; if email is in db res.send(false) else create account
-
   // \/ this validates email (returns true if its an email else returns false if not valid email)
   if(validator.validate(req.params.email)) {
-    db.User.find({ email: req.params.email }, { password: req.params.password })
+    db.User.find({ email: req.params.email })
       .then(response => {
         if(response.length === 0){
           db.User.create({ email: req.params.email }, { password: req.params.password }).then(createResponse => {
-            res.json(createResponse);
+            sess.email = req.params.email;
+            sess.password = req.params.password;
+            res.send(sess);
           });
         } else {
           res.send("already")
@@ -73,18 +84,13 @@ app.post("/create/:email/:password", (req, res) => {
 });
 
 app.post("/login/:email/:password", (req, res) => {
-  // We can setup this route to make a call to the database to see if the username and password exists, then if it exists login and start the session;
   sess = req.session;
-
   db.User.find({ email: req.params.email }, { password: req.params.password })
     .then(response => {
-      // Idk what response is going to be. we can figure this out whenever we setup the database
-      console.log(response);
-      // We need to make a Conditional if account found set email & password to sess Object then res.send(true); else account not found res.send(false); \/ this does nothing yet
       if(response.length !== 0) {
         sess.email = req.params.email;
         sess.password = req.params.password;
-        res.send(response);
+        res.send(sess);
       } else {
         res.send("not found");
       }
