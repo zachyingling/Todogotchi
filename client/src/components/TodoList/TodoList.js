@@ -69,7 +69,7 @@ export default class TodoList extends React.Component {
             todos: state.todos.filter(todo => todo.id !==id)
         }));
     };  
-    //this appears to break react page
+  
 
     removeAllTodosThatAreChecked = () => {
         this.setState(state => ({
