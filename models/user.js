@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 var userSchema = new Schema({
   userId:{
-    type: Number,
-    required: true,
+    type: Number
 //use this instead????
     // type: mongoose.Schema.Types.ObjectId
   },

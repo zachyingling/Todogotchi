@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 var toDoSchema = new Schema({
   userId: {
-    type: Number,
-    required: true
+    type: Number
   }, 
   listItem: {
   	type: String
