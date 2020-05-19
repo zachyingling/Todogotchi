@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const petSchema = new Schema({
+var petSchema = new Schema({
     userId: {
         type: Number,
         required: true
@@ -25,7 +25,7 @@ const petSchema = new Schema({
         timestamps: true
     }
 });
-const Pet = mongoose.model("Pet", petSchema);
+var Pet = mongoose.model("Pet", petSchema);
 
 module.exports = Pet;
 
