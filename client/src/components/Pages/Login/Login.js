@@ -32,7 +32,7 @@ class Login extends React.Component {
 
   handleFormSubmit = () => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
-    Axios.post("/login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
+    return Axios.post("/login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
       console.log(axiosResponse);
       this.setState({
         email: "",
