@@ -42,9 +42,9 @@ app.use(session({
 
 
 // \/ These create something in the collections but pets is there with nothing
-db.User.create({password: "test", email: "test"}).then(response=> {
-  console.log(response);
-}).catch(err => console.log(err));
+// db.User.create({password: "test", email: "test"}).then(response=> {
+//   console.log(response);
+// }).catch(err => console.log(err));
 
 // db.ToDoList.create({userId: "129831"}).then(response=> {
 //   console.log(response);
@@ -68,7 +68,7 @@ app.post("/create/:email/:password", (req, res) => {
 
   // \/ this validates email (returns true if its an email else returns false if not valid email)
   if(validator.validate(req.params.email)) {
-    db.User.find({ email: req.params.email, password: req.params.password })
+    db.User.find({ email: req.params.email })
       .then(response => {
         if(response.length === 0){
           db.User.create({ email: req.params.email }, { password: req.params.password }).then(createResponse => {
@@ -86,20 +86,20 @@ app.post("/create/:email/:password", (req, res) => {
 app.post("/login/:email/:password", (req, res) => {
   // We can setup this route to make a call to the database to see if the username and password exists, then if it exists login and start the session;
   sess = req.session;
-  // db.User.find({ email: req.params.email }, { password: req.params.password })
-  //   .then(response => {
-  //     // Idk what response is going to be. we can figure this out whenever we setup the database
-  //     console.log(response);
-  //     // We need to make a Conditional if account found set email & password to sess Object then res.send(true); else account not found res.send(false); \/ this does nothing yet
-  //     if(response.length !== 0) {
-  //       sess.email = req.params.email;
-  //       sess.password = req.params.password;
-  //       res.send(response);
-  //     } else {
-  //       res.send("not found");
-  //     }
-  //   })
-  //   .catch(err => console.log(err));
+  db.User.find({ email: req.params.email }, { password: req.params.password })
+    .then(response => {
+      // Idk what response is going to be. we can figure this out whenever we setup the database
+      console.log(response);
+      // We need to make a Conditional if account found set email & password to sess Object then res.send(true); else account not found res.send(false); \/ this does nothing yet
+      if(response.length !== 0) {
+        sess.email = req.params.email;
+        sess.password = req.params.password;
+        res.send(sess);
+      } else {
+        res.send("not found");
+      }
+    })
+    .catch(err => console.log(err));
 });
 
 app.post("/logout", (req, res) => {
