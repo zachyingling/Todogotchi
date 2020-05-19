@@ -7,13 +7,17 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const logger = require("morgan");
 let sess;
+const db = require("./models");
+//dbString
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/todo_db";
+mongoose.connect(MONGODB_URI);
+mongoose.Promise = Promise;
 
-const dbString = process.env.MONGODB_URI || "mongodb://localhost/todo_db";
 const dbOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true
 };
-const connection = mongoose.createConnection(dbString, dbOptions);
+const connection = mongoose.createConnection(MONGODB_URI, dbOptions);
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

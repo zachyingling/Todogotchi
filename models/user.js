@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+var userSchema = new Schema({
   userId:{
     type: Number,
     required: true,
@@ -25,6 +25,6 @@ const userSchema = new Schema({
 //use this to create a unique object id???
 // schema.path('_id'); 
 
-const User = mongoose.model("User", userSchema);
+var User = mongoose.model("User", userSchema);
 
 module.exports = User;
