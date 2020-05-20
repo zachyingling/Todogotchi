@@ -1,7 +1,5 @@
-// Exporting an object containing all of our models
-
 module.exports = {
-  User: require("./user"),
+  User: require("./User"),
   ToDoList: require("./toDos"),
   Pet: require("./pet")
 };

@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-var ToDoSchema = new Schema({
+var toDoSchema = new Schema({
   userId: {
-  	type: Number
+    type: Number,
+    required: true
   }, 
   listItem: {
   	type: String
@@ -12,9 +13,10 @@ var ToDoSchema = new Schema({
     type: Boolean
   },
   lastUpdated: {
-      type: Date
+      type: Date,
+      timestamps: true
   }
 });
-var ToDoList = mongoose.model("ToDoList", ToDoSchema);
+var ToDoList = mongoose.model("ToDoList", toDoSchema);
 
 module.exports = ToDoList;

@@ -17,9 +17,16 @@ class CreateAccountForm extends React.Component {
   };
 
   handleSubmit = () => {
-    Axios.post("/create/" + this.state.email + "/" + this.state.password)
+    return Axios.post("/create/" + this.state.email + "/" + this.state.password)
       .then(response => {
-        console.log(response);
+        if(response.data === "!valid"){
+          alert("Email not valid.");
+        } else if(response.data === "already") {
+          alert("Account already made with that email.");
+        } else {
+          // React router the account info here \/
+          console.log(response);
+        }
         // Might not need this \/
         // this.setState({
         //   email: "",
