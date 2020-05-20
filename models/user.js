@@ -1,11 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+const userSchema = new Schema({
   userId:{
-    type: Number
-//use this instead????
-    // type: mongoose.Schema.Types.ObjectId
+    type: mongoose.Schema.Types.ObjectId
   },
   email: {
     type: String,
@@ -15,15 +13,15 @@ var userSchema = new Schema({
   },
   login: {
     type: Date,
-    //formerly date.now, is this change oK???
-    // default: Date.now,
-    timestamps: true
+    default: Date.now,
+    timestamps: true,
+    required: true
   }
 });
 
 //use this to create a unique object id???
 // schema.path('_id'); 
 
-var User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;

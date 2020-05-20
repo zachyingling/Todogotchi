@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-var toDoSchema = new Schema({
+const toDoSchema = new Schema({
   userId: {
     type: Number
   }, 
@@ -16,6 +16,6 @@ var toDoSchema = new Schema({
       timestamps: true
   }
 });
-var ToDoList = mongoose.model("ToDoList", toDoSchema);
+const ToDoList = mongoose.model("ToDoList", toDoSchema);
 
 module.exports = ToDoList;
