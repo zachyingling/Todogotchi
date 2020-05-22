@@ -10,6 +10,7 @@ const db = require("./models");
 let sess;
 
 const dbOptions = {
+  useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true

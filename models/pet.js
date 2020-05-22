@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-var petSchema = new Schema({
+const petSchema = new Schema({
     userId: {
-        type: Number,
-        required: true
+        type: Number
     },
     creatureId: {
         type: Number,
@@ -25,7 +24,7 @@ var petSchema = new Schema({
         timestamps: true
     }
 });
-var Pet = mongoose.model("Pet", petSchema);
+const Pet = mongoose.model("Pet", petSchema);
 
 module.exports = Pet;
 
