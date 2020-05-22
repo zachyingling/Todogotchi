@@ -6,7 +6,7 @@ import axios from "axios";
 // unsure about a lot of the data I need to pass/return
 
 export default {
-  // Gets user's pet info. unsure if we will be passing id or another identifier of the specific user and their session
+  // Gets user's pet info. unsure if we will be passing id or another identifier of the specific user and their session - objectID and ref*** look at webscraper
   getStats: function(id) {
     return axios.get("/api/stats/" + id);
   },
