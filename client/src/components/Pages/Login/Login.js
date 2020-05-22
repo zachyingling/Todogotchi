@@ -1,7 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import CreateAccount from "../../CreateAccount/CreateAccount";
-import { BrowserRouter as Redirect } from "react-router-dom";
+import { BrowserRouter as Redirect, withRouter } from "react-router-dom";
 // css imported from elsewhere not necissariyl from Login folder
 let redirectToReferrer;
 
@@ -62,42 +62,40 @@ class Login extends React.Component {
     console.log(redirectToReferrer);
     console.log(this.props);
 
-    if (this.state.redirectToReferrer === true) {
-      return (
-        <Redirect to="/home" />
+    if (redirectToReferrer === true) {
+      return this.props.history.push("/home"); 
+    } else {
+      return(
+        <div className="container">
+          <h1 className="text-center">Please Login</h1>
+          <form className="form">
+            <label htmlFor="email">Email:</label>
+            <input
+              value={this.state.email}
+              name="email"
+              id="email"
+              onChange={this.handleInputChange}
+              type="text"
+              placeholder="Email"
+            />
+            <label htmlFor="password">Password(minimum 8 characters):</label>
+            <input
+              value={this.state.password}
+              name="password"
+              onChange={this.handleInputChange}
+              type="password"
+              id="password"
+              placeholder="Password"
+              minLength="8"
+              required
+            />
+            <input type="submit" onClick={this.handlePassword} value="Submit" />
+          </form>
+          <CreateAccount />
+        </div>
       );
     }
-
-    return(
-      <div className="container">
-        <h1 className="text-center">Please Login</h1>
-        <form className="form">
-          <label htmlFor="email">Email:</label>
-          <input
-            value={this.state.email}
-            name="email"
-            id="email"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="Email"
-          />
-          <label htmlFor="password">Password(minimum 8 characters):</label>
-          <input
-            value={this.state.password}
-            name="password"
-            onChange={this.handleInputChange}
-            type="password"
-            id="password"
-            placeholder="Password"
-            minLength="8"
-            required
-          />
-          <input type="submit" onClick={this.handlePassword} value="Submit" />
-        </form>
-        <CreateAccount />
-      </div>
-    );
   }
 }
 
-export default Login;
+export default withRouter(Login);

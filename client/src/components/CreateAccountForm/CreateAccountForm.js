@@ -1,6 +1,6 @@
 import React from "react";
 import Axios from "axios";
-import { BrowserRouter as Redirect } from "react-router-dom";
+import { BrowserRouter as Redirect, withRouter } from "react-router-dom";
 
 class CreateAccountForm extends React.Component {
   state = {
@@ -76,4 +76,4 @@ class CreateAccountForm extends React.Component {
   }
 }
 
-export default CreateAccountForm;
+export default withRouter(CreateAccountForm);
