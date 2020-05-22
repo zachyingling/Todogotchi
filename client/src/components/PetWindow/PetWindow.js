@@ -2,7 +2,7 @@ import React, { Component }  from "react";
 // import "../PetWindow/Petwindow.css";
 import {
     CircularProgressbar,
-    CircularProgressbarWithChildren,
+    // CircularProgressbarWithChildren,
     buildStyles
   } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';

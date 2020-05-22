@@ -11,7 +11,8 @@ let sess;
 
 const dbOptions = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 };
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/todo_db";
 
