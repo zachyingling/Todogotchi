@@ -1,13 +1,24 @@
 import React from "react";
 import Axios from "axios";
 import CreateAccount from "../../CreateAccount/CreateAccount";
+import { BrowserRouter as Redirect } from "react-router-dom";
 // css imported from elsewhere not necissariyl from Login folder
+let redirectToReferrer;
 
 // this is our 'first' page that shows a log in/register feature
 class Login extends React.Component {
+  redirectToReferrer = false;
+
   state = {
     email: "",
-    password: ""
+    password: "",
+  };
+
+  login = () => {
+    // \/ Refference in App.js
+    // auth.authenticate(() => {
+    //   this.setState(() => ({ redirectToReferrer: true }))
+    // });
   };
 
   handleInputChange = event => {
@@ -37,16 +48,26 @@ class Login extends React.Component {
       if(axiosResponse.data === "not found"){
         alert("Account not found.");
       } else {
-        // Reroute on react router here
         this.setState({
           email: "",
           password: ""
         });
+        redirectToReferrer = true;
+        this.props.login();
       }
     }).catch(err => console.log(err));
   };
 
   render() {
+    console.log(redirectToReferrer);
+    console.log(this.props);
+
+    if (this.state.redirectToReferrer === true) {
+      return (
+        <Redirect to="/home" />
+      );
+    }
+
     return(
       <div className="container">
         <h1 className="text-center">Please Login</h1>
