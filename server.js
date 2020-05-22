@@ -10,13 +10,19 @@ const db = require("./models");
 let sess;
 
 const dbOptions = {
+  useCreateIndex: true,
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 };
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/todo_db";
 
 mongoose.connect(MONGODB_URI, dbOptions);
 mongoose.Promise = Promise;
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 //dbString
 const connection = mongoose.createConnection(MONGODB_URI, dbOptions);
@@ -50,16 +56,16 @@ app.use(session({
 //   console.log(response);
 // }).catch(err => console.log(err));
 
-app.get("/", (req, res) => {
-  // Start session here
-  sess = req.session;
+// app.get("/", (req, res) => {
+//   // Start session here
+//   sess = req.session;
 
-  if(sess.email){
-    res.send(sess); // tells the react router to route to /home route
-  } else {
-    res.send(false); // tells the react router to route to / route with err message
-  }
-});
+//   if(sess.email){
+//     res.send(sess); // tells the react router to route to /home route
+//   } else {
+//     res.send(false); // tells the react router to route to / route with err message
+//   }
+// });
 
 app.post("/create/:email/:password", (req, res) => {
   sess = req.session;

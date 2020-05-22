@@ -1,5 +1,5 @@
 module.exports = {
-  User: require("./User"),
+  User: require("./user"),
   ToDoList: require("./toDos"),
   Pet: require("./pet")
 };
