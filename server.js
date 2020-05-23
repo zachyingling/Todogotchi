@@ -20,7 +20,7 @@ const dbOptions = {
 
 // app.use(app.router);
 // routes.initialize(app);
-app.use(routes);
+// app.use(routes);
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/todo_db";
 
@@ -57,16 +57,6 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 // Equals 1 day in milliseconds
   }
 }));
-app.use(session({
-  secret: "some secret",
-  resave: false, // false making it so the session is saved to MongoStore whenever the req.session is modified
-  saveUninitialized: false, // false making it so the session is saved to db whenever the req.session is modified
-  store: sessionStore,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 // Equals 1 day in milliseconds
-  }
-}));
-
 // \/ These create something in the collections but pets is there with nothing
 // db.User.create({password: "test", email: "test"}).then(response=> {
 //   console.log(response);
@@ -95,7 +85,7 @@ app.post("/create/:email/:password", (req, res) => {
     db.User.find({ email: req.params.email })
       .then(response => {
         if(response.length === 0){
-          db.User.create({ email: req.params.email }, { password: req.params.password }).then(createResponse => {
+          db.User.create({ email: req.params.email, password: req.params.password }).then(createResponse => {
             sess.email = req.params.email;
             sess.password = req.params.password;
             res.send(sess);
@@ -111,7 +101,7 @@ app.post("/create/:email/:password", (req, res) => {
 
 app.post("/login/:email/:password", (req, res) => {
   sess = req.session;
-  db.User.find({ email: req.params.email }, { password: req.params.password })
+  db.User.find({ email: req.params.email, password: req.params.password })
     .then(response => {
       if(response.length !== 0) {
         sess.email = req.params.email;

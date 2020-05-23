@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import { BrowserRouter as Redirect, withRouter } from "react-router-dom";
 
 class CreateAccountForm extends React.Component {
   state = {
@@ -17,7 +18,7 @@ class CreateAccountForm extends React.Component {
   };
 
   handleSubmit = () => {
-    return Axios.post("/create/" + this.state.email + "/" + this.state.password)
+    Axios.post("/create/" + this.state.email + "/" + this.state.password)
       .then(response => {
         if(response.data === "!valid"){
           alert("Email not valid.");
@@ -26,6 +27,7 @@ class CreateAccountForm extends React.Component {
         } else {
           // React router the account info here \/
           console.log(response);
+          return <Redirect to="/home" />;
         }
         // Might not need this \/
         // this.setState({
@@ -74,4 +76,4 @@ class CreateAccountForm extends React.Component {
   }
 }
 
-export default CreateAccountForm;
+export default withRouter(CreateAccountForm);
