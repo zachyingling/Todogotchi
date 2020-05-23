@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 var toDoSchema = new Schema({
-  userId: {
-    type: Number,
-    required: true
-  },
-  todoId: {
-    type: Schema.Types.ObjectId,
-    unique: true
-  },
+  // _userId: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "User"
+  // },
+  // todoId: {
+  //   type: Schema.Types.ObjectId,
+  //   unique: true
+  // },
   listItem: {
   	type: String
   },

@@ -23,8 +23,6 @@ const dbOptions = {
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/todo_db";
 
-mongoose.connect(MONGODB_URI, dbOptions);
-mongoose.Promise = Promise;
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -38,6 +36,9 @@ app.use(express.urlencoded({extended: true}));
 app.use(logger("dev"));
 //broke when i inserted this: 
 // app.use(routes);
+
+mongoose.connect(MONGODB_URI, dbOptions);
+mongoose.Promise = Promise;
 
 const sessionStore = new MongoStore({
   mongooseConnection: connection,
