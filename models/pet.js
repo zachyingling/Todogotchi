@@ -6,7 +6,7 @@ const petSchema = new Schema({
         type: Number
     },
     creatureId: {
-        type: Number,
+        type: Schema.Types.ObjectId,
         unique: true
     },
     moodStatus: {
