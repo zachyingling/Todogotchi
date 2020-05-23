@@ -17,9 +17,9 @@ class Login extends React.Component {
 
   login = () => {
     // \/ Refference in App.js
-    this.props.auth.authenticate(() => {
-      this.setState(() => ({ redirectToReferrer: true }));
-    });
+    return this.props.auth.authenticate(() => (
+      this.setState({ redirectToReferrer: true })
+    ));
   };
 
   handleInputChange = event => {
@@ -36,15 +36,15 @@ class Login extends React.Component {
   handlePassword = event => {
     event.preventDefault();
     if(this.state.password.length < 8){
-      alert("Password needs to be 8 characters");
+      return alert("Password needs to be 8 characters");
     } else {
-      this.handleFormSubmit();
+      return this.handleFormSubmit();
     }
   };
 
   handleFormSubmit = () => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
-    Axios.post("login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
+    return Axios.post("login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
       console.log(axiosResponse);
       if(axiosResponse.data === "not found"){
         alert("Account info not valid.");
@@ -53,7 +53,7 @@ class Login extends React.Component {
           email: "",
           password: ""
         });
-        this.login();
+        return this.login();
       }
     }).catch(err => console.log(err));
   };
@@ -64,8 +64,11 @@ class Login extends React.Component {
 
     if (redirectToReferrer === true) {
       this.props.history.push("/home");
+      return (
+        <Redirect to="/home" />
+      );
     } else {
-      return(
+      return (
         <div className="container">
           <h1 className="text-center">Please Login</h1>
           <form className="form">

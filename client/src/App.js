@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as BrowserRouter, Route, Redirect, withRouter, Switch } from "react-router-dom";
 import Login from "./components/Pages/Login/Login";
 import Home from "./components/Pages/Home/Home";
 
@@ -16,21 +16,31 @@ const centralAuthState = {
    }
 };
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  return (<Route {...rest} render={(props) => (
-    centralAuthState.isAuthenticated === true ? <Component {...props} /> : <Redirect to="/" />
-  )} />);
-};
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    centralAuthState.isAuthenticated === true ? (
+      <Component {...props} />
+    ) : (
+      <Redirect to="/" />
+    )
+  )} />
+);
 
 class App extends Component {
   render() {
     return (
-      <Router>
+      <BrowserRouter>
         <div className="wrapper">
-          <Route path="/" component={() => <Login auth={centralAuthState} />} />
-          <PrivateRoute path="/home" component={() => <Home auth={centralAuthState}  />} />
+          <Switch>
+            <Route exact path="/" render={() => (
+              <Login auth={centralAuthState} />
+            )} />
+            <PrivateRoute path="/home" component={() => (
+              <Home auth={centralAuthState} />
+            )} />
+          </Switch>
         </div>
-      </Router>
+      </BrowserRouter>
     );
   }
 }
