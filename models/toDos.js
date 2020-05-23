@@ -5,7 +5,11 @@ var toDoSchema = new Schema({
   userId: {
     type: Number,
     required: true
-  }, 
+  },
+  todoId: {
+    type: Schema.Types.ObjectId,
+    unique: true
+  },
   listItem: {
   	type: String
   },
