@@ -7,6 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const logger = require("morgan");
 const db = require("./models");
+const routes = require("./routes");
 let sess;
 
 const dbOptions = {
@@ -15,6 +16,11 @@ const dbOptions = {
   useUnifiedTopology: true,
   useCreateIndex: true
 };
+
+// app.use(app.router);
+// routes.initialize(app);
+app.use(routes);
+
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/todo_db";
 
 mongoose.connect(MONGODB_URI, dbOptions);
@@ -35,6 +41,9 @@ const sessionStore = new MongoStore({
   mongooseConnection: connection,
   collection: "sessions"
 });
+
+
+
 
 app.use(session({
   secret: "some secret",

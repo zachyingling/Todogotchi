@@ -5,7 +5,8 @@ router.route("/")
 .get(petController.findAll)
 .post(petController.create)
 
-router.route("/:id")
-.delete(petController.remove);
+router
+.route("/:id")
+// .delete(petController.remove);
 
 module.exports = router;
