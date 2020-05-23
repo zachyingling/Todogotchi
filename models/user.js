@@ -2,12 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  userId:{
-    type: Schema.Types.ObjectId,
-    unique: true
-  },
+  // user:{
+  //   type: String,
+  //   required: true,
+  //   unique: { index: { unique: true } }
+  // },
   email: {
     type: String,
+    required: true,
+    unique: { index: { unique: true } }
   },
   password: {
     type: String
@@ -19,10 +22,7 @@ const userSchema = new Schema({
     required: true
   }
 });
-
 //use this to create a unique object id???
 // schema.path('_id'); 
-
 const User = mongoose.model("User", userSchema);
-
 module.exports = User;

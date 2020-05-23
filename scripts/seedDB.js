@@ -5,12 +5,12 @@ const db = require("../models");
 
 mongoose.connect(
     process.env.MONGODB_URI ||
-    "mongodb://localhost/3000"
+    "mongodb://localhost/todo_db"
 );
 
 const userSeed = [
     {
-        userId: 1,
+        // userId: 1,
         email: "marena.ferrel@gmail.com",
         //figure out how to encrypt this with zach
         password: "marena1234",
@@ -19,7 +19,7 @@ const userSeed = [
 ];
 const petSeed = [
     {
-        userId: 1,
+        _userId: 1,
         creatureId: "Phoebe1",
         moodStatus: 8,
         energyLevel: 10,
@@ -55,7 +55,7 @@ db.Pet
     //literally removes everything
     .remove({})
     //inserts the seed
-    .then(() => db.User.collection.insertMany(petSeed))
+    .then(() => db.Pet.collection.insertMany(petSeed))
     //tell me how many you inserted and then exit
     .then(data => {
         console.log(data.result.n + " records inserted!");
@@ -70,7 +70,7 @@ db.ToDoList
     //literally removes everything
     .remove({})
     //inserts the seed
-    .then(() => db.User.collection.insertMany(toDoSeed))
+    .then(() => db.ToDoList.collection.insertMany(toDoSeed))
     //tell me how many you inserted and then exit
     .then(data => {
         console.log(data.result.n + " records inserted!");

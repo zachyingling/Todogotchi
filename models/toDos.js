@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 var toDoSchema = new Schema({
-  userId: {
-    type: Number,
-    required: true
-  },
-  todoId: {
+  _userId: {
     type: Schema.Types.ObjectId,
-    unique: true
+    ref: "User"
   },
+  // todoId: {
+  //   type: Schema.Types.ObjectId,
+  //   unique: true
+  // },
   listItem: {
   	type: String
   },
@@ -22,5 +22,4 @@ var toDoSchema = new Schema({
   }
 });
 var ToDoList = mongoose.model("ToDoList", toDoSchema);
-
 module.exports = ToDoList;
