@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3001;
 const logger = require("morgan");
 const routes = require("./routes");
 const db = require("./models");
-const routes = require("./routes");
+
 let sess;
 
 const dbOptions = {
