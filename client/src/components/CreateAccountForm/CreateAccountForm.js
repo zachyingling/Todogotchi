@@ -29,7 +29,7 @@ class CreateAccountForm extends React.Component {
   };
 
   handleSubmit = () => {
-    Axios.post("/create/" + this.state.email + "/" + this.state.password)
+    Axios.post("/api/users/create/" + this.state.email + "/" + this.state.password)
       .then(response => {
         if(response.data === "!valid"){
           alert("Email not valid.");
