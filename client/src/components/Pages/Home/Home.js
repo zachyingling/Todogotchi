@@ -1,6 +1,7 @@
 import React from "react";
 import PetWindow from "../../PetWindow/PetWindow";
 import TodoList from "../../TodoList/TodoList"; 
+import { BrowserRouter as withRouter } from "react-router-dom";
 // import TodoForm from "../../TodoList/TodoForm"; //sint' currently working
 
 
@@ -13,29 +14,23 @@ import TodoList from "../../TodoList/TodoList";
 // when happyness (or hunger?) level is sated it triggers a happiness event, (access to a minigame) which returns a change to the pet (increased happy, etc
 
 class Home extends React.Component {
+  state = {
+    email: this.props.auth.email
+  };
 
-    render() {
-        return(
-          <div>
-          <div className="container">
-            <PetWindow />
-            </div>
-          
-          
-          <div className="container">
+  render() {
+    console.log(this.state);
+    return (
+      <div>
+        <div className="container">
+          <PetWindow />
+        </div>
+        <div className="container">
            <TodoList />
-          
         </div>
-        
-        
-        </div>
-        );
-      }
-
-
-
-
-
+      </div>
+    );
+  }
 }
 
 export default Home;
