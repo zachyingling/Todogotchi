@@ -2,12 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  userId:{
-    type: Schema.Types.ObjectId,
-    unique: true
-  },
+  // user:{
+  //   type: String,
+  //   required: true,
+  //   unique: { index: { unique: true } }
+  // },
   email: {
     type: String,
+    required: true,
+    unique: { index: { unique: true } }
   },
   password: {
     type: String
@@ -17,7 +20,19 @@ const userSchema = new Schema({
     default: Date.now,
     timestamps: true,
     required: true
-  }
+  },
+  userToDos: 
+    {
+    type: Schema.Types.ObjectId,
+      ref: "ToDoList"
+    }
+  ,
+  userPets: 
+    {
+    type: Schema.Types.ObjectId,
+      ref: "Pet"
+    }
+  ,
 });
 
 //use this to create a unique object id???
