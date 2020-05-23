@@ -6,6 +6,7 @@ const validator = require("email-validator");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const logger = require("morgan");
+const routes = require("./routes");
 const db = require("./models");
 const routes = require("./routes");
 let sess;
@@ -36,6 +37,8 @@ const connection = mongoose.createConnection(MONGODB_URI, dbOptions);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(logger("dev"));
+//broke when i inserted this: 
+// app.use(routes);
 
 const sessionStore = new MongoStore({
   mongooseConnection: connection,
