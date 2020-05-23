@@ -59,7 +59,8 @@ class Login extends React.Component {
   };
 
   render() {
-    const { redirectToReferrer } = this.state.redirectToReferrer;
+    const { redirectToReferrer } = this.state;
+    console.log(redirectToReferrer);
 
     if (redirectToReferrer === true) {
       this.props.history.push("/home");

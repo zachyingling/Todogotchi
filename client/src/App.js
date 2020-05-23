@@ -27,8 +27,8 @@ class App extends Component {
     return (
       <Router>
         <div className="wrapper">
-          <Route exact path="/" component={() => <Login auth={centralAuthState} />} />
-          <PrivateRoute exact path="/home" component={() => <Home auth={centralAuthState}  />} />
+          <Route path="/" component={() => <Login auth={centralAuthState} />} />
+          <PrivateRoute path="/home" component={() => <Home auth={centralAuthState}  />} />
         </div>
       </Router>
     );
