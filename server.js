@@ -85,7 +85,7 @@ app.post("/create/:email/:password", (req, res) => {
     db.User.find({ email: req.params.email })
       .then(response => {
         if(response.length === 0){
-          db.User.create({ email: req.params.email }, { password: req.params.password }).then(createResponse => {
+          db.User.create({ email: req.params.email, password: req.params.password }).then(createResponse => {
             sess.email = req.params.email;
             sess.password = req.params.password;
             res.send(sess);
@@ -101,7 +101,7 @@ app.post("/create/:email/:password", (req, res) => {
 
 app.post("/login/:email/:password", (req, res) => {
   sess = req.session;
-  db.User.find({ email: req.params.email }, { password: req.params.password })
+  db.User.find({ email: req.params.email, password: req.params.password })
     .then(response => {
       if(response.length !== 0) {
         sess.email = req.params.email;

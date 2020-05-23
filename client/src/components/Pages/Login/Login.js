@@ -47,7 +47,7 @@ class Login extends React.Component {
     Axios.post("login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
       console.log(axiosResponse);
       if(axiosResponse.data === "not found"){
-        alert("Account not found.");
+        alert("Account info not valid.");
       } else {
         this.setState({
           email: "",
