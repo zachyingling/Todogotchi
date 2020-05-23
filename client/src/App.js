@@ -1,39 +1,34 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Redirect, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Login from "./components/Pages/Login/Login";
 import Home from "./components/Pages/Home/Home";
 
+const centralAuthState = {
+  isAuthenticated: false,
+   authenticate(callback) {
+      this.isAuthenticated = true;
+      setTimeout(callback, 300);
+   },
+   signout(callback) {
+      this.isAuthenticated = false;
+      setTimeout(callback, 300); 
+   }
+};
+
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  return <Route {...rest} render={(props) => (
-    this.state.isAuthenticated === true ? <Component {...props} /> : <Redirect to="/" />
-  )} />
+  return (<Route {...rest} render={(props) => (
+    centralAuthState.isAuthenticated === true ? <Component {...props} /> : <Redirect to="/" />
+  )} />);
 };
 
 class App extends Component {
-  constructor (props){
-    super(props);
-    this.state = {
-      isAuthenticated: false
-    };
-    this.authenticated = this.authenticated.bind(this);
-    this.signout = this.signout.bind(this);
-  }
-
-  authenticated(){
-    this.setState({ isAuthenticated: true });
-  }
-
-  signout(){
-    this.setState({ isAuthenticated: false });
-  }
-
   render() {
     return (
       <Router>
         <div className="wrapper">
-          <Route exact path="/" component={() => <Login auth={this.state.isAuthenticated} login={this.authenticated} logout={this.signout} />} />
-          <PrivateRoute exact path="/home" component={() => <Home auth={this.state.isAuthenticated} login={this.authenticated} logout={this.signout} />} />
+          <Route exact path="/" component={() => <Login auth={centralAuthState} />} />
+          <PrivateRoute exact path="/home" component={() => <Home auth={centralAuthState}  />} />
         </div>
       </Router>
     );

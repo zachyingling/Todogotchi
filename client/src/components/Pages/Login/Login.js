@@ -3,22 +3,23 @@ import Axios from "axios";
 import CreateAccount from "../../CreateAccount/CreateAccount";
 import { BrowserRouter as Redirect, withRouter } from "react-router-dom";
 // css imported from elsewhere not necissariyl from Login folder
-let redirectToReferrer;
 
 // this is our 'first' page that shows a log in/register feature
 class Login extends React.Component {
-  redirectToReferrer = false;
-
-  state = {
-    email: "",
-    password: "",
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      redirectToReferrer: false
+    };
+  }
 
   login = () => {
     // \/ Refference in App.js
-    // auth.authenticate(() => {
-    //   this.setState(() => ({ redirectToReferrer: true }))
-    // });
+    this.props.auth.authenticate(() => {
+      this.setState(() => ({ redirectToReferrer: true }));
+    });
   };
 
   handleInputChange = event => {
@@ -37,7 +38,9 @@ class Login extends React.Component {
     if(this.state.password.length < 8){
       alert("Password needs to be 8 characters");
     } else {
-      this.handleFormSubmit();
+      return (
+        this.handleFormSubmit()
+      );
     }
   };
 
@@ -50,20 +53,18 @@ class Login extends React.Component {
       } else {
         this.setState({
           email: "",
-          password: ""
+          password: "",
+          redirectToReferrer: true
         });
-        redirectToReferrer = true;
-        this.props.login();
       }
     }).catch(err => console.log(err));
   };
 
   render() {
-    console.log(redirectToReferrer);
-    console.log(this.props);
+    const { redirectToReferrer } = this.state.redirectToReferrer;
 
     if (redirectToReferrer === true) {
-      return this.props.history.push("/home"); 
+      this.props.history.push("/home");
     } else {
       return(
         <div className="container">
