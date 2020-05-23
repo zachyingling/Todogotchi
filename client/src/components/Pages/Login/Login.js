@@ -38,24 +38,22 @@ class Login extends React.Component {
     if(this.state.password.length < 8){
       alert("Password needs to be 8 characters");
     } else {
-      return (
-        this.handleFormSubmit()
-      );
+      this.handleFormSubmit();
     }
   };
 
   handleFormSubmit = () => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
-    return Axios.post("/login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
-      console.log(axiosResponse.data);
+    Axios.post("login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
+      console.log(axiosResponse);
       if(axiosResponse.data === "not found"){
         alert("Account not found.");
       } else {
         this.setState({
           email: "",
-          password: "",
-          redirectToReferrer: true
+          password: ""
         });
+        this.login();
       }
     }).catch(err => console.log(err));
   };
