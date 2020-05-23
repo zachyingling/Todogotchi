@@ -2,7 +2,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import CreateAccountForm from "../CreateAccountForm/CreateAccountForm";
 
-function CreateAccount () {
+function CreateAccount (props) {
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);
@@ -19,7 +19,7 @@ function CreateAccount () {
           <Modal.Title>Create Account</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CreateAccountForm />
+          <CreateAccountForm auth={props}/>
         </Modal.Body>
         <Modal.Footer>
           <button variant="secondary" onClick={handleClose}>
