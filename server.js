@@ -45,7 +45,15 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 // Equals 1 day in milliseconds
   }
 }));
-
+app.use(session({
+  secret: "some secret",
+  resave: false, // false making it so the session is saved to MongoStore whenever the req.session is modified
+  saveUninitialized: false, // false making it so the session is saved to db whenever the req.session is modified
+  store: sessionStore,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 // Equals 1 day in milliseconds
+  }
+}));
 
 // \/ These create something in the collections but pets is there with nothing
 // db.User.create({password: "test", email: "test"}).then(response=> {
@@ -129,8 +137,8 @@ app.listen(PORT, () => {
 //   });
 // });
 
-// // this is our create methid
-// // this method adds new data in our database
+// this is our create methid
+// this method adds new data in our database
 // router.post('/putData', (req, res) => {
 //   let data = new Data();
 
