@@ -14,6 +14,7 @@ class CreateAccountForm extends React.Component {
 
   login = () => {
     // \/ Refference in App.js
+    this.props.auth.auth.email = this.state.email;
     return this.props.auth.auth.authenticate(() => (
       this.setState({ redirectToReferrer: true })
     ));
@@ -38,10 +39,6 @@ class CreateAccountForm extends React.Component {
         } else {
           console.log(response);
           // React router the account info here \/
-          this.setState({
-            email: "",
-            password: ""
-          });
           this.login();
         }
       })

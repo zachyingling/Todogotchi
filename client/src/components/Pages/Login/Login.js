@@ -17,6 +17,7 @@ class Login extends React.Component {
 
   login = () => {
     // \/ Refference in App.js
+    this.props.auth.email = this.state.email;
     return this.props.auth.authenticate(() => (
       this.setState({ redirectToReferrer: true })
     ));
@@ -49,10 +50,6 @@ class Login extends React.Component {
       if(axiosResponse.data === "not found"){
         alert("Account info not valid.");
       } else {
-        this.setState({
-          email: "",
-          password: ""
-        });
         return this.login();
       }
     }).catch(err => console.log(err));
