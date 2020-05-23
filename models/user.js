@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   userId:{
-    type: mongoose.Schema.Types.ObjectId
+    type: Schema.Types.ObjectId,
+    unique: true
   },
   email: {
     type: String,

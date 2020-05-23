@@ -6,7 +6,9 @@ const validator = require("email-validator");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const logger = require("morgan");
+const routes = require("./routes");
 const db = require("./models");
+
 let sess;
 
 const dbOptions = {
@@ -15,6 +17,11 @@ const dbOptions = {
   useUnifiedTopology: true,
   useCreateIndex: true
 };
+
+// app.use(app.router);
+// routes.initialize(app);
+app.use(routes);
+
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/todo_db";
 
 mongoose.connect(MONGODB_URI, dbOptions);
@@ -30,11 +37,16 @@ const connection = mongoose.createConnection(MONGODB_URI, dbOptions);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(logger("dev"));
+//broke when i inserted this: 
+// app.use(routes);
 
 const sessionStore = new MongoStore({
   mongooseConnection: connection,
   collection: "sessions"
 });
+
+
+
 
 app.use(session({
   secret: "some secret",
