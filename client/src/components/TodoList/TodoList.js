@@ -31,6 +31,7 @@ export default class TodoList extends React.Component {
 
     };
     
+    
     addTodo = (todo) => {
         // this.state.todo.push(todo);//this mutates teh state
         // const newTodos = [todo, ...this.state.todos]; //... makes copy of array

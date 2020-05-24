@@ -14,4 +14,4 @@ export default props => (
   );
 
 
-//seperate component to render todos<div onClick={props.toggleComplete}>{props.todo.text}</div>;
+//seperate component to render todo's<div onClick={props.toggleComplete}>{props.todo.text}</div>;
