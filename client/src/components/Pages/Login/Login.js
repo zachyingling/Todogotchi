@@ -17,6 +17,7 @@ class Login extends React.Component {
 
   login = () => {
     // \/ Refference in App.js
+    this.props.auth.email = this.state.email;
     return this.props.auth.authenticate(() => (
       this.setState({ redirectToReferrer: true })
     ));
@@ -44,15 +45,11 @@ class Login extends React.Component {
 
   handleFormSubmit = () => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
-    return Axios.post("login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
+    return Axios.post("/api/users/login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
       console.log(axiosResponse);
       if(axiosResponse.data === "not found"){
         alert("Account info not valid.");
       } else {
-        this.setState({
-          email: "",
-          password: ""
-        });
         return this.login();
       }
     }).catch(err => console.log(err));
@@ -60,7 +57,6 @@ class Login extends React.Component {
 
   render() {
     const { redirectToReferrer } = this.state;
-    console.log(redirectToReferrer);
 
     if (redirectToReferrer === true) {
       this.props.history.push("/home");
@@ -94,7 +90,7 @@ class Login extends React.Component {
             />
             <input type="submit" onClick={this.handlePassword} value="Submit" />
           </form>
-          <CreateAccount />
+          <CreateAccount auth={this.props.auth} />
         </div>
       );
     }
