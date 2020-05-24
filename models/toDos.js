@@ -14,11 +14,12 @@ var toDoSchema = new Schema({
   	type: String
   },
   completionStatus: {
-    type: Boolean
+    type: Boolean,
+    default: false
   },
   lastUpdated: {
       type: Date,
-      timestamps: true
+      default: Date.now
   }
 });
 var ToDoList = mongoose.model("ToDoList", toDoSchema);

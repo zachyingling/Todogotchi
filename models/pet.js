@@ -2,11 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const petSchema = new Schema({
-
-    creatureId: {
+    _userid: {
         type: Schema.Types.ObjectId,
-        unique: { index: { unique: true } }
+        ref: "User"
     },
+    // creatureId: {
+    //     type: Schema.Types.ObjectId,
+    //     unique: { index: { unique: true } }
+    // },
     moodStatus: {
         type: Number,
         min: [1, "Very Sad"],

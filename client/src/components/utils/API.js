@@ -27,8 +27,8 @@ export default {
   },
 
   // creates new todo for user - unsure what needs to be passed besides id
-  saveTodo: function(id, todo) {
-      return axios.post("api/todos/" + id)
+  saveTodo: function( todo) {
+      return axios.post("api/todos", todo)
   }
 
 };
