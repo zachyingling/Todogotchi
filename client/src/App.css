@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
+/* fonts and nonbootstrap styling */
+
+body {
+  font-family: 'VT323', monospace, sans-serif;
+
+
+
+
+  height: 1200px;
+  background-color: blue; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to bottom right, yellow, orange, cyan, teal);
+   /* can specifiy to bottom left etc, and use as few or many colors as wanted, will likely be subsituted for another look */
+
+}

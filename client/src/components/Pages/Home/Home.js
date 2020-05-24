@@ -3,8 +3,11 @@ import PetWindow from "../../PetWindow/PetWindow";
 import TodoList from "../../TodoList/TodoList"; 
 import API from "../../utils/API";
 import { BrowserRouter as withRouter } from "react-router-dom";
+<<<<<<< HEAD
 import { restart } from "nodemon";
 // import TodoForm from "../../TodoList/TodoForm"; //sint' currently working
+=======
+>>>>>>> 111dd23b1cec58fd3ce43ee928115b0059d18310
 
 
 // can import css from elsewhere, 
