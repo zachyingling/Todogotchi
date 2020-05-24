@@ -34,10 +34,7 @@ const userSchema = new Schema({
     }
   ,
 });
-
 //use this to create a unique object id???
 // schema.path('_id'); 
-
 const User = mongoose.model("User", userSchema);
-
 module.exports = User;

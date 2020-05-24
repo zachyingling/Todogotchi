@@ -37,6 +37,7 @@
     "morgan": "^1.10.0",
     "react-circular-progressbar": "^2.0.3",
     "react-game-kit": "^1.0.6",
+    "react-router-dom": "^5.2.0",
     "shortid": "^2.2.15"
   },
   "devDependencies": {
