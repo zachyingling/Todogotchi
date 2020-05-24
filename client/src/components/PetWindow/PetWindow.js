@@ -15,7 +15,9 @@ import sad from "../../images/sprites/phoebe-sad.gif";
 import API from "../utils/API";
 
 
+
 class PetWindow extends Component {
+
     state = {
         // should pull initial values from database, setting manually for now
         happiness: 12,
