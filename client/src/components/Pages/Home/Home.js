@@ -2,7 +2,6 @@ import React from "react";
 import PetWindow from "../../PetWindow/PetWindow";
 import TodoList from "../../TodoList/TodoList"; 
 import { BrowserRouter as withRouter } from "react-router-dom";
-// import TodoForm from "../../TodoList/TodoForm"; //sint' currently working
 
 
 // can import css from elsewhere, 
