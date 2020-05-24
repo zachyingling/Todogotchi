@@ -22,13 +22,25 @@ export default {
   },
 
   // Gets user's todo info
-  getTodos: function(id) {
-      return axios.get("api/todos/" + id);
+  getTodos: function() {
+      return axios.get("api/todos/");
   },
 
   // creates new todo for user - unsure what needs to be passed besides id
-  saveTodo: function( todo) {
-      return axios.post("api/todos", todo)
-  }
+  saveTodo: function(todoData) {
+      return axios.post("api/todos", todoData)
+  },
+
+  // newUserTodo: function(newTodo) {
+  //   return axios.post("")
+  // }
+
+  getUsers: function() {
+    return axios.get("api/users");
+  },
+
+  updateTodo: function(id) {
+    return axios.put("api/todos/" + id)
+  }, 
 
 };

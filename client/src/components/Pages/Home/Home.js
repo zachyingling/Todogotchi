@@ -1,7 +1,9 @@
 import React from "react";
 import PetWindow from "../../PetWindow/PetWindow";
 import TodoList from "../../TodoList/TodoList"; 
+import API from "../../utils/API";
 import { BrowserRouter as withRouter } from "react-router-dom";
+import { restart } from "nodemon";
 // import TodoForm from "../../TodoList/TodoForm"; //sint' currently working
 
 
@@ -18,12 +20,29 @@ class Home extends React.Component {
     email: this.props.auth.email
   };
 
+  // componentDidMount() {
+
+  //   // determine current user via email address
+  //   API.getUsers()
+  //   .then(res => {
+  //     var i;
+  //     for (i=0; i < res.data; i++) {
+  //       if (res.data[i].email === this.state.email) {
+  //         this.setState({ currentUserID: res.data[i]._id})
+  //       }
+  //     };
+  //     console.log(this.state.currentUserId)
+  //   })
+  //     .catch(err => console.log(err));
+  // }
+
   render() {
     console.log(this.state);
+
     return (
       <div>
         <div className="container">
-          <PetWindow />
+          <PetWindow email={this.state.email}/>
         </div>
         <div className="container">
            <TodoList />

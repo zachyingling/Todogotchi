@@ -4,8 +4,18 @@ const db = require("../../models");
 const validator = require("email-validator");
 let sess;
 
+router.route("/")
+.get(userController.findAll)
+.post(userController.create);
+
+router
+  .route("/:id")
+  .get(userController.findById)
+  .put(userController.update);
+
 router.route("/create/:email/:password").post((req, res) => {
-  sess = req.session;
+  sess = req.params;
+  // stuff
 
   // \/ this validates email (returns true if its an email else returns false if not valid email)
   if(validator.validate(req.params.email)) {
@@ -26,8 +36,9 @@ router.route("/create/:email/:password").post((req, res) => {
   }
 });
 
+
 router.route("/login/:email/:password").post((req, res) => {
-  sess = req.session;
+  sess = req.params;
   db.User.find({ email: req.params.email, password: req.params.password })
     .then(response => {
       if(response.length !== 0) {
