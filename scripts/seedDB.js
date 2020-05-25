@@ -44,7 +44,7 @@ db.User
             //tell me how many you inserted and then exit
             .then(data => {
                 console.log(data.result.n + " records inserted!");
-                console.log(data.ops[0]._id);
+                // console.log(data.ops[0]._id);
                 console.log(data.ops[0]);
                 db.User.findOneAndUpdate( { email: "a" }, { userPets: data.ops[0]} , { new: true} )
                 .then((result) => {
@@ -64,7 +64,7 @@ db.User
             //tell me how many you inserted and then exit
             .then(data => {
                 console.log(data.result.n + " records inserted!");
-                console.log(data.ops[0]._id);
+                // console.log(data.ops[0]._id);
                 db.User.findOneAndUpdate( { email: "a" }, { userToDos: data.ops[0]} , { new: true} )
                 .then((result) => {
                     process.exit(0);

@@ -16,28 +16,10 @@ import { BrowserRouter as withRouter } from "react-router-dom";
 class Home extends React.Component {
   state = {
     // using following state values to track/identify current user ID
-    email: this.props.auth.email,
-    currentUserId: ""
+    email: this.props.auth.email
   };
 
-  // componentDidMount() {
 
-  //   // determine current user via email address, pass current user ID to child components
-  //   API.getUsers()
-  //   .then(res => {
-  //     // console.log(res.data[0]._id);
-  //     var userResults = res.data
-  //     var i;
-  //     for (i=0; i < userResults.length; i++) {
-  //       if (userResults[i].email === this.state.email) {
-  //         this.setState({ currentUserId: userResults[i]._id})
-  //         console.log(userResults[i]._id);
-  //       }
-  //     };
-  //     console.log(this.state.currentUserId)
-  //   })
-  //     .catch(err => console.log(err));
-  // }
 
   render() {
     console.log(this.state);
