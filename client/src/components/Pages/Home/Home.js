@@ -1,6 +1,7 @@
 import React from "react";
 import PetWindow from "../../PetWindow/PetWindow";
 import TodoList from "../../TodoList/TodoList"; 
+import ToDoForm from "../../TodoList/TodoForm";
 import API from "../../utils/API";
 import { BrowserRouter as withRouter } from "react-router-dom";
 
@@ -27,10 +28,10 @@ class Home extends React.Component {
     return (
       <div>
         <div className="container">
-          <PetWindow email={this.state.email} currentUserId={this.state.currentUserId}/>
+          <PetWindow email={this.state.email}/>
         </div>
         <div className="container">
-           <TodoList />
+           <TodoList email={this.state.email}/>
         </div>
       </div>
     );
