@@ -20,24 +20,24 @@ class Home extends React.Component {
     currentUserId: ""
   };
 
-  componentDidMount() {
+  // componentDidMount() {
 
-    // determine current user via email address, pass current user ID to child components
-    API.getUsers()
-    .then(res => {
-      // console.log(res.data[0]._id);
-      var userResults = res.data
-      var i;
-      for (i=0; i < userResults.length; i++) {
-        if (userResults[i].email === this.state.email) {
-          this.setState({ currentUserId: userResults[i]._id})
-          console.log(userResults[i]._id);
-        }
-      };
-      console.log(this.state.currentUserId)
-    })
-      .catch(err => console.log(err));
-  }
+  //   // determine current user via email address, pass current user ID to child components
+  //   API.getUsers()
+  //   .then(res => {
+  //     // console.log(res.data[0]._id);
+  //     var userResults = res.data
+  //     var i;
+  //     for (i=0; i < userResults.length; i++) {
+  //       if (userResults[i].email === this.state.email) {
+  //         this.setState({ currentUserId: userResults[i]._id})
+  //         console.log(userResults[i]._id);
+  //       }
+  //     };
+  //     console.log(this.state.currentUserId)
+  //   })
+  //     .catch(err => console.log(err));
+  // }
 
   render() {
     console.log(this.state);
