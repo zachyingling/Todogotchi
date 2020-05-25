@@ -7,6 +7,8 @@ router.route("/")
 
 router
 .route("/:id")
+.get(petController.findById)
+.put(petController.update);
 // .delete(petController.remove);
 
 module.exports = router;

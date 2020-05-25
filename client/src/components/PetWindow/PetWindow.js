@@ -20,8 +20,8 @@ class PetWindow extends Component {
 
     state = {
         // should pull initial values from database, setting manually for now
-        happiness: 12,
-        energy: 8,
+        happiness: 5,
+        energy: 3,
         imgSrc: happy,
         happinessPercent: 100,
         email: this.props.email,
@@ -51,17 +51,26 @@ class PetWindow extends Component {
                 var i;
                 for (i = 0; i < userResults.length; i++) {
                     if (userResults[i].email === this.state.email) {
-                        this.setState({ currentUserId: userResults[i]._id, currentPetId: userResults })
-            
+                        this.setState({ currentUserId: userResults[i]._id, currentPetId: userResults[i].userPets[0] })
                         console.log(userResults[i]._id);
+                        console.log(userResults[i].userPets[0])
                     }
                 };
-                console.log(this.state.currentUserId)
+                console.log(this.state)
             })
             .catch(err => console.log(err));
     };
 
-
+    getStats = () => {
+        API.getPetStats(this.state.currentPetId)
+            .then(res =>
+                {
+                console.log(res);
+                this.setState({ happiness: res.data.moodStatus, energy: res.data.energyLevel });
+                }
+            )
+            .catch(err => console.log(err));
+    };
 
     // API experimentation
     experiment = () => {
@@ -107,7 +116,8 @@ class PetWindow extends Component {
         //     .catch(err => {
         //         console.log(err);
         //     })
-        this.handleTodoSave();
+        // this.handleTodoSave();
+        this.getStats();
         console.log(this.state);
 
     };
@@ -146,9 +156,31 @@ class PetWindow extends Component {
             })
     };
 
-    // decrementHappiness = () => {
-
-    // }
+    decrementHappiness = () => {
+  
+            var decreasedHappiness;
+            API.getPetStats(this.state.currentPetId)
+                .then(res => {
+                    decreasedHappiness = res.data.moodStatus - 1;
+                    console.log("Happiness decreased to " + decreasedHappiness);
+                    if (decreasedHappiness >= 0) {
+                        API.saveHappiness(this.state.currentPetId,
+                            {
+                                moodStatus: decreasedHappiness
+                            }
+                        )
+                            .then(response => {
+                                console.log(response);
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            })
+                    } else {
+                        console.log("Pet is already the saddest.")
+                    }
+                })
+                .catch(err => console.log(err));
+    };
 
 
     componentDidMount() {
@@ -156,13 +188,17 @@ class PetWindow extends Component {
 
         // get current happiness and energy stats from the database. 
         // this.loadStats();
+    
         this.setCurrentUser();
+        this.getStats();
 
 
 
 
         this.interval = setInterval(() => {
-            this.setState({ happiness: this.state.happiness - 1 });
+            this.getStats();
+            // this.setState({ happiness: this.state.happiness - 1 });
+            this.decrementHappiness();
             this.getAnimationState();
             this.setState({ happinessPercent: this.state.happiness * 100 / 12 });
             // post new happiness stat to database
