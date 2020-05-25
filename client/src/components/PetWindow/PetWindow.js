@@ -1,10 +1,10 @@
-import React, { Component }  from "react";
+import React, { Component } from "react";
 // import "../PetWindow/Petwindow.css";
 import {
     CircularProgressbar,
     // CircularProgressbarWithChildren,
     buildStyles
-  } from "react-circular-progressbar";
+} from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 import { Col, Row, Container } from "../Grid";
 import Jumbotron from "../Jumbotron";
@@ -31,14 +31,32 @@ class PetWindow extends Component {
     // sets appropriate image according to happiness level
     getAnimationState() {
         if (this.state.happiness > 9) {
-            this.setState({ imgSrc: happy})
+            this.setState({ imgSrc: happy })
         } else if (this.state.happiness > 6) {
-            this.setState({ imgSrc: meh})
+            this.setState({ imgSrc: meh })
         } else if (this.state.happiness > 3) {
-            this.setState({imgSrc: pissy})
+            this.setState({ imgSrc: pissy })
         } else {
-            this.setState({imgSrc: sad})
+            this.setState({ imgSrc: sad })
         }
+    };
+
+    // determine and set current user ID in state
+    setCurrentUser = () => {
+        API.getUsers()
+            .then(res => {
+                // console.log(res.data[0]._id);
+                var userResults = res.data
+                var i;
+                for (i = 0; i < userResults.length; i++) {
+                    if (userResults[i].email === this.state.email) {
+                        this.setState({ currentUserId: userResults[i]._id })
+                        console.log(userResults[i]._id);
+                    }
+                };
+                console.log(this.state.currentUserId)
+            })
+            .catch(err => console.log(err));
     };
 
 
@@ -50,10 +68,10 @@ class PetWindow extends Component {
         //         console.log(res.data)
         //         )
         //         .catch(err => console.log(err));
-        
+
         API.getUsers()
-        .then(res =>
-            console.log(res.data)
+            .then(res =>
+                console.log(res.data)
             )
             .catch(err => console.log(err));
     };
@@ -65,25 +83,64 @@ class PetWindow extends Component {
         //         console.log(res.data)
         //         )
         //         .catch(err => console.log(err));
-        
+
         // API.getUsers()
         // .then(res => {
-        //     var allToDos;
-        //     var currentUserTodos = res.data[0].userToDos;
-        //     console.log(currentUserTodos);
+        //     console.log(res);
         //    })
         //     .catch(err => console.log(err));
 
+        // API.updateUser(this.state.currentUserId, 
+        //    {
+        //        userToDos: {
+        //         listItem: "laugh maniacally",
+        //         completionStatus: true,
+        //         lastUpdated: new Date(Date.now())
+        //        }
+        //    })
+        //     .then(response => {
+        //         console.log(response);
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
+        this.handleTodoSave();
         console.log(this.state);
+
     };
 
     // API experimentation
     handleTodoSave = () => {
+        var newToDo;
+        var myCurrentUser = this.state.currentUserId;
         API.saveTodo({
-            listItem: "experiment",
+            listItem: "ahhhhhhh",
             completionStatus: false,
             lastUpdated: new Date(Date.now())
         })
+            .then(response => {
+                console.log(response.data);
+                newToDo = response.data;
+                console.log("my currentUserId: " + myCurrentUser);
+                API.updateUser(myCurrentUser,
+                    {
+                        $push:
+                        {
+                            userToDos: newToDo
+                        }
+                    }
+                )
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
 
@@ -93,27 +150,28 @@ class PetWindow extends Component {
 
         // get current happiness and energy stats from the database. 
         // this.loadStats();
-        
+
         this.interval = setInterval(() => {
-            this.setState({ happiness: this.state.happiness - 1});
+            this.setState({ happiness: this.state.happiness - 1 });
             this.getAnimationState();
-            this.setState({ happinessPercent: this.state.happiness * 100 / 12});
+            this.setState({ happinessPercent: this.state.happiness * 100 / 12 });
             // post new happiness stat to database
             console.log("Happiness has decreased to: " + this.state.happiness);
         }, 2000);
 
 
         // api experimentation
-        this.handleTodoSave();
+        this.setCurrentUser();
+
         console.log(this.state);
-        
+
     };
 
     componentWillUnmount() {
         clearInterval(this.interval);
-      }
+    }
 
-      // load user's current energy and happiness stats from database. may need to pass user's id or something, also not sure about data passed in this.setState
+    // load user's current energy and happiness stats from database. may need to pass user's id or something, also not sure about data passed in this.setState
     //   loadStats = () => {
     //       API.getStats()
     //       .then(res =>
@@ -133,11 +191,11 @@ class PetWindow extends Component {
         // API.saveEnergy({ energy: this.state.energy})
         //     .then(res => this.loadStats())
         //     .catch(err => console.log(err));
-    
+
 
         console.log("Energy has increased to: " + this.state.energy);
     };
-    
+
     // will track consumption of energy and update energy stat in database. will likely live in todo copmonent
     decrementEnergy = () => {
         if (this.state.energy > 0) {
@@ -172,15 +230,16 @@ class PetWindow extends Component {
 
     };
 
- 
-    
-    
+
+
+
     render() {
         return (
             <Container fluid>
                 <Row>
                     <Col size="md-12">
                         <Jumbotron>
+                            <h1>Signed in as: {this.state.email}</h1>
                             <h1>Happiness: {this.state.happiness}</h1>
                             <h1>Energy: {this.state.energy}</h1>
                         </Jumbotron>
@@ -195,26 +254,26 @@ class PetWindow extends Component {
                     </Col>
                     <Col size="md-3">
                         <button className="btn btn-success"
-                              onClick={() => {
+                            onClick={() => {
                                 this.decrementEnergy();
                                 this.incrementHappiness();
-                              }}>
+                            }}>
                             Play/Pet
                         </button>
                     </Col>
                     <Col size="md-3">
                         <button className="btn btn-danger"
-                              onClick={() => {
+                            onClick={() => {
                                 this.experiment();
-                              }}>
+                            }}>
                             Experiment
                         </button>
                     </Col>
                     <Col size="md-3">
                         <button className="btn btn-danger"
-                              onClick={() => {
+                            onClick={() => {
                                 this.experiment2();
-                              }}>
+                            }}>
                             Experiment 2
                         </button>
                     </Col>
@@ -226,8 +285,8 @@ class PetWindow extends Component {
                             counterClockwise={true}
                             strokeWidth={50}
                             styles={buildStyles({
-                            strokeLinecap: "butt"
-                                })}
+                                strokeLinecap: "butt"
+                            })}
                         />
                     </Col>
                 </Row>

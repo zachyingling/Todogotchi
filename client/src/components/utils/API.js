@@ -39,6 +39,10 @@ export default {
     return axios.get("api/users");
   },
 
+  updateUser: function(id, body) {
+    return axios.put("api/users/" + id, body)
+  },
+
   updateTodo: function(id) {
     return axios.put("api/todos/" + id)
   }, 
