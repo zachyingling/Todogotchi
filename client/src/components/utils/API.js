@@ -7,8 +7,8 @@ import axios from "axios";
 
 export default {
   // Gets user's pet info. unsure if we will be passing id or another identifier of the specific user and their session - objectID and ref*** look at webscraper
-  getStats: function(id) {
-    return axios.get("/api/stats/" + id);
+  getPetStats: function(id) {
+    return axios.get("api/pets/" + id);
   },
 
   // Updates user's energy stat - unsure what may need to be passed here
@@ -17,8 +17,8 @@ export default {
   },
 
   // Updates user's happiness stat - unsure what to pass here
-  saveHappiness: function(currentHappiness) {
-    return axios.post("/api/stats", currentHappiness);
+  saveHappiness: function(id, body) {
+    return axios.put("api/pets/" + id, body);
   },
 
   // Gets user's todo info
