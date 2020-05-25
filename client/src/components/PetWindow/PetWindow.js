@@ -60,11 +60,11 @@ class PetWindow extends Component {
 
     experiment2 = () => {
         console.log("clicked experiment 2 button");
-        API.getTodos()
-            .then(res =>
-                console.log(res.data)
-                )
-                .catch(err => console.log(err));
+        // API.getTodos()
+        //     .then(res =>
+        //         console.log(res.data)
+        //         )
+        //         .catch(err => console.log(err));
         
         // API.getUsers()
         // .then(res => {
@@ -73,6 +73,8 @@ class PetWindow extends Component {
         //     console.log(currentUserTodos);
         //    })
         //     .catch(err => console.log(err));
+
+        console.log(this.state);
     };
 
     // API experimentation
