@@ -23,7 +23,7 @@ export default {
 
   // Gets user's todo info
   getTodos: function() {
-      return axios.get("api/todos/");
+      return axios.get("api/todos");
   },
 
   // creates new todo for user - unsure what needs to be passed besides id
