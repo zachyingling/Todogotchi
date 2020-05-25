@@ -39,11 +39,31 @@
 
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 
+
+@font-face {
+  font-family: 'Alphasmoke-OOX6';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../src/fonts/Alphasmoke-OOX6.ttf'); 
+  src: local('Open Sans'), local('OpenSans'),
+       url('../src/fonts/Alphasmoke-OOX6.ttf?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../src/fonts/Alphasmoke-OOX6.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../src/fonts/Alphasmoke-OOX6.ttf#OpenSans') format('ttf'); /* Legacy iOS */
+}
+h1 {
+  font-family: 'Alphasmoke-OOX6', monospace, sans-serif;
+  background-color: #EA1083;
+  color: #13F8E7; 
+  opacity: 1
+  /* will need to specify this for title */
+
+
+}
 /* fonts and nonbootstrap styling */
 
 body {
   font-family: 'VT323', monospace, sans-serif;
-
+  
 
 
 
