@@ -7,7 +7,7 @@ export default props => (
         }}
         onClick={props.toggleComplete}
       >
-        {props.todo.text}
+        {props.todo.listItem}
       </div>
       <button onClick={props.onDelete}>x</button>
     </div>

@@ -33,7 +33,8 @@ export default class TodoList extends React.Component {
         email: this.props.email,
         currentPetId: "",
         todoDB: [],
-        todoArr: []
+        todoArr: [],
+        bwabwabwa: false
     };
 
 
@@ -41,9 +42,7 @@ export default class TodoList extends React.Component {
         // this.state.todo.push(todo);//this mutates teh state
         // const newTodos = [todo, ...this.state.todos]; //... makes copy of array
 
-        this.setState(state => ({
-            todos: [todo, ...state.todos]
-        }));
+
 
         console.log(todo);
         var newToDo;
@@ -77,7 +76,10 @@ export default class TodoList extends React.Component {
             })
             .catch(err => {
                 console.log(err);
-            })
+            });
+        this.setState(state => ({
+            todos: [todo, ...state.todos]
+        }));
     };
 
     toggleComplete = (id) => {
@@ -119,6 +121,11 @@ export default class TodoList extends React.Component {
     };
     // {JSON.stringify(this.state.todos)} changed this for map funciton
 
+    renderTodos = () => {
+        this.setState({ todoToShow: "all" });
+        console.log("renderTodos was called");
+    }
+
     setCurrentUser = () => {
         API.getUsers()
             .then(res => {
@@ -128,24 +135,25 @@ export default class TodoList extends React.Component {
                 var i;
                 for (i = 0; i < userResults.length; i++) {
                     if (userResults[i].email === this.state.email) {
-                        this.setState({ currentUserId: userResults[i]._id, currentPetId: userResults[i].userPets[0], todoDB: userResults[i].userToDos  })
+                        this.setState({ currentUserId: userResults[i]._id, currentPetId: userResults[i].userPets[0], todoDB: userResults[i].userToDos })
                         console.log(userResults[i]._id);
 
                         API.getTodos()
-                        .then(res => {
-                            console.log(res);
-                            var toDoResults = res.data;
-                            var j;
-                            for (j=0; j < toDoResults.length; j++) {
-                                if (this.state.todoDB.includes(toDoResults[j]._id)) {
-                                    this.state.todoArr.push(toDoResults[j])
+                            .then(res => {
+                                console.log(res);
+                                var toDoResults = res.data;
+                                var j;
+                                for (j = 0; j < toDoResults.length; j++) {
+                                    if (this.state.todoDB.includes(toDoResults[j]._id)) {
+                                        this.state.todoArr.push(toDoResults[j])
+                                    }
                                 }
-                            }
-                        })
+                            })
                             .catch(err => console.log(err));
                     }
                 };
-                console.log(this.state)
+                console.log(this.state);
+                this.renderTodos();
             })
             .catch(err => console.log(err));
     };
@@ -156,18 +164,29 @@ export default class TodoList extends React.Component {
         // get current happiness and energy stats from the database. 
         // this.loadStats();
         this.setCurrentUser();
+        console.log(this.props);
     };
+
+    // componentDidUpdate(prevProps) {
+    //     // Typical usage (don't forget to compare props):
+    //     if (this.props.userID !== prevProps.userID) {
+    //       this.fetchData(this.props.userID);
+    //     }
+    //   }
 
 
     render() {
         let todos = [];
 
         if (this.state.todoToShow === "all") {
-            todos = this.state.todos;
-        } else if (this.state.todoToShow === "active") {
-            todos = this.state.todos.filter(todo => !todo.complete);
+            todos = this.state.todoArr;
+        }
+        else if (this.state.todoToShow === "active") {
+            // todos = this.state.todos.filter(todo => !todo.complete);
+            todos = this.state.todoArr;
         } else if (this.state.todoToShow === "complete") {
-            todos = this.state.todos.filter(todo => todo.complete);
+            // todos = this.state.todos.filter(todo => todo.complete);
+            todos = this.state.todoArr;
         }
 
 
@@ -196,9 +215,9 @@ export default class TodoList extends React.Component {
                     {todos.map(todo => (
                         <Todo
                             // {this.state.todos.map(todo => (
-                            key={todo.id}
-                            toggleComplete={() => this.toggleComplete(todo.id)}
-                            onDelete={() => this.handleDeleteTodo(todo.id)}
+                            key={todo._id}
+                            toggleComplete={() => this.toggleComplete(todo._id)}
+                            onDelete={() => this.handleDeleteTodo(todo._id)}
                             todo={todo} />
                     ))}
 
