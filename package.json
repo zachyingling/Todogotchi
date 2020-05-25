@@ -27,6 +27,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
+    "child_process": "^1.0.2",
     "connect-mongo": "^3.2.0",
     "email-validator": "^2.0.4",
     "express": "^4.17.1",
@@ -35,13 +36,15 @@
     "mongodb": "^3.5.7",
     "mongoose": "^5.9.14",
     "morgan": "^1.10.0",
+    "pstree.remy": "^1.1.8",
     "react-circular-progressbar": "^2.0.3",
     "react-game-kit": "^1.0.6",
     "react-router-dom": "^5.2.0",
+    "resolve": "^1.17.0",
     "shortid": "^2.2.15"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
-    "nodemon": "^1.18.7"
+    "nodemon": "^1.19.4"
   }
 }

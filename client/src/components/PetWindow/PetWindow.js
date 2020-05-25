@@ -23,7 +23,9 @@ class PetWindow extends Component {
         happiness: 12,
         energy: 8,
         imgSrc: happy,
-        happinessPercent: 100
+        happinessPercent: 100,
+        email: this.props.email,
+        currentUserId: this.props.currentUserId
     };
 
     // sets appropriate image according to happiness level
@@ -39,6 +41,53 @@ class PetWindow extends Component {
         }
     };
 
+
+    // API experimentation
+    experiment = () => {
+        console.log("clicked experiment button");
+        // API.getTodos()
+        //     .then(res =>
+        //         console.log(res.data)
+        //         )
+        //         .catch(err => console.log(err));
+        
+        API.getUsers()
+        .then(res =>
+            console.log(res.data)
+            )
+            .catch(err => console.log(err));
+    };
+
+    experiment2 = () => {
+        console.log("clicked experiment 2 button");
+        // API.getTodos()
+        //     .then(res =>
+        //         console.log(res.data)
+        //         )
+        //         .catch(err => console.log(err));
+        
+        // API.getUsers()
+        // .then(res => {
+        //     var allToDos;
+        //     var currentUserTodos = res.data[0].userToDos;
+        //     console.log(currentUserTodos);
+        //    })
+        //     .catch(err => console.log(err));
+
+        console.log(this.state);
+    };
+
+    // API experimentation
+    handleTodoSave = () => {
+        API.saveTodo({
+            listItem: "experiment",
+            completionStatus: false,
+            lastUpdated: new Date(Date.now())
+        })
+    };
+
+
+
     componentDidMount() {
         // this will likely need to have some kind of .then function - get current state from database, .then load database stat values accordingly. otherwise it will reflect default state set above and then switch.
 
@@ -52,6 +101,11 @@ class PetWindow extends Component {
             // post new happiness stat to database
             console.log("Happiness has decreased to: " + this.state.happiness);
         }, 2000);
+
+
+        // api experimentation
+        this.handleTodoSave();
+        console.log(this.state);
         
     };
 
@@ -117,6 +171,8 @@ class PetWindow extends Component {
         }
 
     };
+
+ 
     
     
     render() {
@@ -132,18 +188,34 @@ class PetWindow extends Component {
                     <Col size="md-12">
                         <img src={this.state.imgSrc} alt="Pet Gif" />
                     </Col>
-                    <Col size="md-6">
+                    <Col size="md-3">
                         <button className="btn btn-primary" onClick={this.incrementEnergy}>
                             Add 4 Energy
                         </button>
                     </Col>
-                    <Col size="md-6">
+                    <Col size="md-3">
                         <button className="btn btn-success"
                               onClick={() => {
                                 this.decrementEnergy();
                                 this.incrementHappiness();
                               }}>
                             Play/Pet
+                        </button>
+                    </Col>
+                    <Col size="md-3">
+                        <button className="btn btn-danger"
+                              onClick={() => {
+                                this.experiment();
+                              }}>
+                            Experiment
+                        </button>
+                    </Col>
+                    <Col size="md-3">
+                        <button className="btn btn-danger"
+                              onClick={() => {
+                                this.experiment2();
+                              }}>
+                            Experiment 2
                         </button>
                     </Col>
                     <Col size="md-4">

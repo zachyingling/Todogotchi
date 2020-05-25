@@ -21,17 +21,19 @@ const userSchema = new Schema({
     timestamps: true,
     required: true
   },
-  userToDos: 
+  userToDos: [
     {
     type: Schema.Types.ObjectId,
       ref: "ToDoList"
     }
+  ]
   ,
-  userPets: 
+  userPets: [
     {
     type: Schema.Types.ObjectId,
       ref: "Pet"
     }
+  ]
   ,
 });
 //use this to create a unique object id???
