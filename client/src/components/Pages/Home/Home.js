@@ -3,11 +3,6 @@ import PetWindow from "../../PetWindow/PetWindow";
 import TodoList from "../../TodoList/TodoList"; 
 import API from "../../utils/API";
 import { BrowserRouter as withRouter } from "react-router-dom";
-<<<<<<< HEAD
-import { restart } from "nodemon";
-// import TodoForm from "../../TodoList/TodoForm"; //sint' currently working
-=======
->>>>>>> 111dd23b1cec58fd3ce43ee928115b0059d18310
 
 
 // can import css from elsewhere, 
@@ -20,24 +15,29 @@ import { restart } from "nodemon";
 
 class Home extends React.Component {
   state = {
-    email: this.props.auth.email
+    // using following state values to track/identify current user ID
+    email: this.props.auth.email,
+    currentUserId: ""
   };
 
-  // componentDidMount() {
+  componentDidMount() {
 
-  //   // determine current user via email address
-  //   API.getUsers()
-  //   .then(res => {
-  //     var i;
-  //     for (i=0; i < res.data; i++) {
-  //       if (res.data[i].email === this.state.email) {
-  //         this.setState({ currentUserID: res.data[i]._id})
-  //       }
-  //     };
-  //     console.log(this.state.currentUserId)
-  //   })
-  //     .catch(err => console.log(err));
-  // }
+    // determine current user via email address, pass current user ID to child components
+    API.getUsers()
+    .then(res => {
+      // console.log(res.data[0]._id);
+      var userResults = res.data
+      var i;
+      for (i=0; i < userResults.length; i++) {
+        if (userResults[i].email === this.state.email) {
+          this.setState({ currentUserId: userResults[i]._id})
+          console.log(userResults[i]._id);
+        }
+      };
+      console.log(this.state.currentUserId)
+    })
+      .catch(err => console.log(err));
+  }
 
   render() {
     console.log(this.state);
@@ -45,7 +45,7 @@ class Home extends React.Component {
     return (
       <div>
         <div className="container">
-          <PetWindow email={this.state.email}/>
+          <PetWindow email={this.state.email} currentUserId={this.state.currentUserId}/>
         </div>
         <div className="container">
            <TodoList />

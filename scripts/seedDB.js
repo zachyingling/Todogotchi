@@ -22,13 +22,8 @@ const toDoSeed = [
 ];
 const userSeed = [
     {
-<<<<<<< HEAD
         email: "a",
         password: "aaaaaaaa",
-=======
-        email: "marena.ferrel@gmail.com",
-        password: "marena1234",
->>>>>>> 111dd23b1cec58fd3ce43ee928115b0059d18310
         login: new Date(Date.now())
     }
 ];
@@ -37,13 +32,8 @@ db.User
     .remove({})
     //inserts the seed
     .then(() => db.User.insertMany(userSeed))
-<<<<<<< HEAD
     // .then(() => db.User.findOneAndUpdate( { email: "a" }, {$push: { userToDos: }}, { new: true} ))
     // .then(() => db.User.findOneAndUpdate( { email: "a" }, {$push: { userPets: petSeed} }, { new: true} ))
-=======
-    // .then(() => db.User.findOneAndUpdate( { email: "marena.ferrel@gmail.com" }, {$push: { userToDos: }}, { new: true} ))
-    // .then(() => db.User.findOneAndUpdate( { email: "marena.ferrel@gmail.com" }, {$push: { userPets: petSeed} }, { new: true} ))
->>>>>>> 111dd23b1cec58fd3ce43ee928115b0059d18310
     //tell me how many you inserted and then exit
     .then(data => {
         db.Pet
@@ -55,12 +45,8 @@ db.User
             .then(data => {
                 console.log(data.result.n + " records inserted!");
                 console.log(data.ops[0]._id);
-<<<<<<< HEAD
                 console.log(data.ops[0]);
                 db.User.findOneAndUpdate( { email: "a" }, { userPets: data.ops[0]} , { new: true} )
-=======
-                db.User.findOneAndUpdate( { email: "marena.ferrel@gmail.com" }, { userPets: data.ops[0]} , { new: true} )
->>>>>>> 111dd23b1cec58fd3ce43ee928115b0059d18310
                 .then((result) => {
                     process.exit(0);
                 })
@@ -79,11 +65,7 @@ db.User
             .then(data => {
                 console.log(data.result.n + " records inserted!");
                 console.log(data.ops[0]._id);
-<<<<<<< HEAD
                 db.User.findOneAndUpdate( { email: "a" }, { userToDos: data.ops[0]} , { new: true} )
-=======
-                db.User.findOneAndUpdate( { email: "marena.ferrel@gmail.com" }, { userToDos: data.ops[0]} , { new: true} )
->>>>>>> 111dd23b1cec58fd3ce43ee928115b0059d18310
                 .then((result) => {
                     process.exit(0);
                 })

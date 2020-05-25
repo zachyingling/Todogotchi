@@ -24,7 +24,8 @@ class PetWindow extends Component {
         energy: 8,
         imgSrc: happy,
         happinessPercent: 100,
-        email: this.props.email
+        email: this.props.email,
+        currentUserId: this.props.currentUserId
     };
 
     // sets appropriate image according to happiness level
