@@ -22,11 +22,17 @@ router.route("/create/:email/:password").post((req, res) => {
     db.User.find({ email: req.params.email })
       .then(response => {
         if(response.length === 0){
-          db.User.create({ email: req.params.email, password: req.params.password }).then(createResponse => {
-            sess.email = req.params.email;
-            sess.password = req.params.password;
-            res.send(sess);
-          });
+          db.Pet.create({ moodStatus: 8, energyLevel: 10 })
+          .then(data => {
+            console.log(data);
+            db.User.create({ email: req.params.email, password: req.params.password, userPets: data._id }).then(createResponse => {
+              sess.email = req.params.email;
+              sess.password = req.params.password;
+              res.send(sess);
+            });
+
+          })
+
         } else {
           res.send("already")
         }
