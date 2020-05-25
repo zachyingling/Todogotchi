@@ -25,7 +25,8 @@ class PetWindow extends Component {
         imgSrc: happy,
         happinessPercent: 100,
         email: this.props.email,
-        currentUserId: this.props.currentUserId
+        currentUserId: "",
+        currentPetId: ""
     };
 
     // sets appropriate image according to happiness level
@@ -50,7 +51,8 @@ class PetWindow extends Component {
                 var i;
                 for (i = 0; i < userResults.length; i++) {
                     if (userResults[i].email === this.state.email) {
-                        this.setState({ currentUserId: userResults[i]._id })
+                        this.setState({ currentUserId: userResults[i]._id, currentPetId: userResults })
+            
                         console.log(userResults[i]._id);
                     }
                 };
@@ -58,6 +60,7 @@ class PetWindow extends Component {
             })
             .catch(err => console.log(err));
     };
+
 
 
     // API experimentation
@@ -143,6 +146,9 @@ class PetWindow extends Component {
             })
     };
 
+    // decrementHappiness = () => {
+
+    // }
 
 
     componentDidMount() {
@@ -150,6 +156,10 @@ class PetWindow extends Component {
 
         // get current happiness and energy stats from the database. 
         // this.loadStats();
+        this.setCurrentUser();
+
+
+
 
         this.interval = setInterval(() => {
             this.setState({ happiness: this.state.happiness - 1 });
@@ -161,7 +171,6 @@ class PetWindow extends Component {
 
 
         // api experimentation
-        this.setCurrentUser();
 
         console.log(this.state);
 
