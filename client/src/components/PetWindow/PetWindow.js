@@ -203,7 +203,7 @@ class PetWindow extends Component {
             this.setState({ happinessPercent: this.state.happiness * 100 / 12 });
             // post new happiness stat to database
             console.log("Happiness has decreased to: " + this.state.happiness);
-        }, 2000);
+        }, 1000);
 
 
         // api experimentation
@@ -243,18 +243,51 @@ class PetWindow extends Component {
 
     // will track consumption of energy and update energy stat in database. will likely live in todo copmonent
     decrementEnergy = () => {
-        if (this.state.energy > 0) {
-            this.setState({ energy: this.state.energy - 1 });
 
-            // post new energy stat to database. unsure if passing correct data
-            // API.saveEnergy({ energy: this.state.energy})
-            //     .then(res => this.loadStats())
-            //     .catch(err => console.log(err));
+        API.getPetStats(this.state.currentPetId)
+        .then(res => {
+            console.log(res);
+            if (res.data.energyLevel === 0) {
+                console.log("You have no energy to play!");
+            }  else {
+                var newEnergy = res.data.energyLevel - 1;
+                var newHappiness = res.data.moodStatus + 1;
+                console.log("Energy level decreased to " + newEnergy);
+                console.log("Happiness level increased to " + newHappiness);
+                API.saveEnergy(this.state.currentPetId,
+                    {
+                        moodStatus: newHappiness,
+                        energyLevel: newEnergy
+                    }
+                )
+                    .then(response => {
+                        console.log(response);
+                        this.getStats();
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            }
+           
 
-            console.log("Energy has decreased to: " + this.state.energy);
-        } else {
-            console.log("Energy is already fully depleted. Proof: " + this.state.energy)
+
         }
+        )
+        .catch(err => console.log(err));
+
+
+        // if (this.state.energy > 0) {
+        //     this.setState({ energy: this.state.energy - 1 });
+
+        //     // post new energy stat to database. unsure if passing correct data
+        //     // API.saveEnergy({ energy: this.state.energy})
+        //     //     .then(res => this.loadStats())
+        //     //     .catch(err => console.log(err));
+
+        //     console.log("Energy has decreased to: " + this.state.energy);
+        // } else {
+        //     console.log("Energy is already fully depleted. Proof: " + this.state.energy)
+        // }
     };
 
     // will increase pet's happiness when user plays with it/pets it

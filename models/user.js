@@ -22,6 +22,13 @@ const userSchema = new Schema({
     timestamps: true,
     required: true
   },
+  // record last logout through API call in componentWillMount in PetWindow component.
+  // lastLogout: {
+  //   type: Date,
+  //   default: Date.now,
+  //   timestamps: true,
+  //   required: true
+  // },
   userToDos: [
     {
     type: Schema.Types.ObjectId,

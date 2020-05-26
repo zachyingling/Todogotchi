@@ -9,6 +9,7 @@ export default props => (
       >
         {props.todo.listItem}
       </div>
+      <button onClick={props.completeTodo}>✓</button>
       <button onClick={props.onDelete}>x</button>
     </div>
   );
