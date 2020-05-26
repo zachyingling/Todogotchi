@@ -12,8 +12,8 @@ export default {
   },
 
   // Updates user's energy stat - unsure what may need to be passed here
-  saveEnergy: function(currentEnergy) {
-    return axios.post("/api/stats", currentEnergy);
+  saveEnergy: function(id, body) {
+    return axios.put("/api/pets/" + id, body);
   },
 
   // Updates user's happiness stat - unsure what to pass here
@@ -31,9 +31,9 @@ export default {
       return axios.post("api/todos", todoData)
   },
 
-  // newUserTodo: function(newTodo) {
-  //   return axios.post("")
-  // }
+  deleteTodo: function(id) {
+      return axios.delete("api/todos/" + id)
+  },
 
   getUsers: function() {
     return axios.get("api/users");
@@ -43,8 +43,8 @@ export default {
     return axios.put("api/users/" + id, body)
   },
 
-  updateTodo: function(id) {
-    return axios.put("api/todos/" + id)
+  updateTodo: function(id, body) {
+    return axios.put("api/todos/" + id, body)
   }, 
 
 };
