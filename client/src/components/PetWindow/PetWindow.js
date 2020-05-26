@@ -317,9 +317,9 @@ class PetWindow extends Component {
                 <Row>
                     <Col size="md-12">
                         <Jumbotron>
-                            <h1>Signed in as: {this.state.email}</h1>
-                            <h1>Happiness: {this.state.happiness}</h1>
-                            <h1>Energy: {this.state.energy}</h1>
+                            <h2>Signed in as: {this.state.email}</h2>
+                            <h2>Happiness: {this.state.happiness}</h2>
+                            <h2>Energy: {this.state.energy}</h2>
                         </Jumbotron>
                     </Col>
                     <Col size="md-12">
@@ -362,9 +362,14 @@ class PetWindow extends Component {
                             maxvalue={12}
                             counterClockwise={true}
                             strokeWidth={50}
+                             // styles={buildStyles({
+                            // strokeLinecap: "butt"
                             styles={buildStyles({
-                                strokeLinecap: "butt"
-                            })}
+                                textColor: "red",
+                                pathColor: "turquoise",
+                                trailColor: "gold"
+                              })}
+    
                         />
                     </Col>
                 </Row>

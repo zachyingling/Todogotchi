@@ -2,6 +2,7 @@ import React from "react";
 import TodoForm from "./TodoForm";
 import Todo from './Todo';
 import API from '../utils/API';
+
 // import Axios from "axios";
 // import CreateAccount from "../../CreateAccount/CreateAccount";
 
@@ -261,7 +262,9 @@ export default class TodoList extends React.Component {
 
 
         return (
-            <div>
+            <div className="container">
+                <div className="row">
+                    <div className="col">
                 <div>
                     {/* minigame area */}
                     {/* <a href="https://benmulhollandpsl.github.io/todogotfree/"" */}
@@ -274,15 +277,19 @@ export default class TodoList extends React.Component {
                     }>MINI Game event</button>
                     {/* return false;"Popup link</a>" */}
                 </div>
+                </div>
+                <div className="col">
+                <TodoForm onSubmit={this.addTodo} />
+                </div>
+                </div>
+                <div className="row " style={{"margin-top": "3vh", "margin-bottom": "3vh"}}>
 
 
-                <div>
 
 
-
-
-                    <TodoForm onSubmit={this.addTodo} />
+                    
                     {todos.map(todo => (
+                        <div className="col">
                         <Todo
                             // {this.state.todos.map(todo => (
                             key={todo._id}
@@ -290,28 +297,34 @@ export default class TodoList extends React.Component {
                             completeTodo={() => this.completeTodo(todo._id)}
                             onDelete={() => this.handleDeleteTodo(todo._id)}
                             todo={todo} />
+                        </div>
                     ))}
 
                 </div>
+
+                {/* need to decide how many to show per row per column for todo list */}
+                
+
+                <div className="row">
+                    <div className="col">
                 <div>
                     todos left: {this.state.todoArr.filter(todo => !todo.completionStatus).length}
                 </div>
-                <div>
-
-                    <button onClick={() => this.updateTodoToShow("all")}>all</button>
-                    <button onClick={() => this.updateTodoToShow("active")}>
-                        active
-        </button>
-
-                    <button onClick={() => this.updateTodoToShow("complete")}>
-                        complete
-         </button>
                 </div>
+                    <div className="col">
+                        <div>
+                            <button onClick={() => this.updateTodoToShow("all")}>all</button>
+                            <button onClick={() => this.updateTodoToShow("active")}>active</button>
+                            <button onClick={() => this.updateTodoToShow("complete")}>complete</button>
+                        </div>
+                    </div>
+                </div>
+
                 {this.state.todos.some(todo => todo.complete) ? (
                     <div>
                         <button onClick={this.removeAllTodosThatAreChecked}>
                             remove all complete todos
-          </button>
+            </button>
                     </div>
                 ) : null}
                 <div>
