@@ -362,9 +362,14 @@ class PetWindow extends Component {
                             maxvalue={12}
                             counterClockwise={true}
                             strokeWidth={50}
+                             // styles={buildStyles({
+                            // strokeLinecap: "butt"
                             styles={buildStyles({
-                                strokeLinecap: "butt"
-                            })}
+                                textColor: "red",
+                                pathColor: "turquoise",
+                                trailColor: "gold"
+                              })}
+    
                         />
                     </Col>
                 </Row>

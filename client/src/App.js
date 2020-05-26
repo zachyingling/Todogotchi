@@ -30,8 +30,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 class App extends Component {
   render() {
     return (
+      <div id="outterDiv">
       <BrowserRouter>
-        <div className="wrapper">
+        <div  className="wrapper">
           <Switch>
             <Route exact path="/" render={() => (
               <Login auth={centralAuthState} />
@@ -42,6 +43,7 @@ class App extends Component {
           </Switch>
         </div>
       </BrowserRouter>
+      </div>
     );
   }
 }
