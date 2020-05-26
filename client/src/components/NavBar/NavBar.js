@@ -6,7 +6,7 @@ const NavBar = props => {
         <AppBar position="static" {...props}>
             <Toolbar>
                 <Typography variant="headline" color="#13F8E7" align="center">
-                Clicky Game
+                Todo-Gotchi
                 </Typography>
             </Toolbar>
         </AppBar>

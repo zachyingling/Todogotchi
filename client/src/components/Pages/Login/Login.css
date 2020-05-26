@@ -1,0 +1,55 @@
+
+
+/* blur and gif for login screen */
+
+
+/* bg is the blurry background */
+.background {
+    background-image: url("/petz.gif");
+    height: 86%;
+    width:86%;
+    filter:blur(20px); 
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+    float: center
+ }
+
+ /* need more research on styling in React  */
+#bg{
+    height:55%;
+    width: 80%;
+    position: absolute;
+    overflow: hidden;
+  
+  }
+  
+  #mainAlbum{
+    width:40%;
+    background-color:rgb(255, 255, 255);
+    border-radius: 15px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    z-index: 999;
+  }
+  /* the notblurry photo on top is mainAlbum and imageAlbum */
+  #imageAlbum img{
+    height: 180px;
+    width: 100%;
+    margin-top: -5px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  
+  }
+  
+  
+
+
+
+
+  
+  

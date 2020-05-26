@@ -2,6 +2,8 @@ import React from "react";
 import Axios from "axios";
 import CreateAccount from "../../CreateAccount/CreateAccount";
 import { BrowserRouter as Redirect, withRouter } from "react-router-dom";
+import "./Login.css";
+
 // css imported from elsewhere not necissariyl from Login folder
 
 // this is our 'first' page that shows a log in/register feature
@@ -57,6 +59,12 @@ class Login extends React.Component {
     }).catch(err => console.log(err));
   };
 
+
+
+
+
+
+  
   render() {
     const { redirectToReferrer } = this.state;
 
@@ -68,7 +76,7 @@ class Login extends React.Component {
     } else {
       return (
         <div className="container">
-          <h1 className="text-center">Please Login</h1>
+          <h2 className="text-center">Please Login</h2>
           <form className="form">
             <label htmlFor="email">Email:</label>
             <input

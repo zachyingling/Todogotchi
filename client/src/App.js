@@ -3,6 +3,8 @@ import './App.css';
 import { BrowserRouter as BrowserRouter, Route, Redirect, Switch, withRouter } from "react-router-dom";
 import Login from "./components/Pages/Login/Login";
 import Home from "./components/Pages/Home/Home";
+import Logo from "./components/Logo/Logo";
+
 
 const centralAuthState = {
   isAuthenticated: false,
@@ -30,7 +32,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 class App extends Component {
   render() {
     return (
+      
+     
+      
+      //logo 
       <div id="outterDiv">
+         <Logo style= {{ background: "#EA1083", marginBottom: "5vh" }} />
+    
+
       <BrowserRouter>
         <div  className="wrapper">
           <Switch>
@@ -46,6 +55,12 @@ class App extends Component {
       </div>
     );
   }
+  
+
+
 }
+
+
+
 
 export default App;
