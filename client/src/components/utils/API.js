@@ -31,6 +31,10 @@ export default {
       return axios.post("api/todos", todoData)
   },
 
+  deleteTodo: function(id) {
+      return axios.delete("api/todos/" + id)
+  },
+
   // newUserTodo: function(newTodo) {
   //   return axios.post("")
   // }
