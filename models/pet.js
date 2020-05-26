@@ -6,10 +6,10 @@ const petSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    // creatureId: {
-    //     type: Schema.Types.ObjectId,
-    //     unique: { index: { unique: true } }
-    // },
+    creatureId: {
+        type: Schema.Types.ObjectId,
+        unique: { index: { unique: true } }
+    },
     moodStatus: {
         type: Number,
         min: [1, "Very Sad"],
