@@ -25,14 +25,14 @@ router.route("/create/:email/:password").post((req, res) => {
           db.Pet.create({ moodStatus: 8, energyLevel: 10 })
           .then(data => {
             console.log(data);
-            db.User.create({ email: req.params.email, password: req.params.password, userPets: data._id }).then(createResponse => {
+            let tempUser = new db.User();
+            let tempPass = tempUser.generateHash(req.params.password);
+            db.User.create({ email: req.params.email, password: tempPass, userPets: data._id }).then(createResponse => {
               sess.email = req.params.email;
-              sess.password = req.params.password;
+              sess.password = tempPass;
               res.send(sess);
             });
-
-          })
-
+          });
         } else {
           res.send("already")
         }
@@ -45,14 +45,21 @@ router.route("/create/:email/:password").post((req, res) => {
 
 router.route("/login/:email/:password").post((req, res) => {
   sess = req.params;
-  db.User.find({ email: req.params.email, password: req.params.password })
+  let tempUser = new db.User();
+  db.User.find({ email: req.params.email })
     .then(response => {
       if(response.length !== 0) {
-        sess.email = req.params.email;
-        sess.password = req.params.password;
-        res.send(sess);
+        tempUser.validatePassword(req.params.password, response[0].password).then(param => {
+          if(param !== true){
+            res.send("!password");
+          } else {
+            sess.email = req.params.email;
+            sess.password = response.password;
+            res.send(sess);
+          }
+        });
       } else {
-        res.send("not found");
+        res.send("Email not found");
       }
     })
     .catch(err => console.log(err));

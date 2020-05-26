@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcrypt");
 
 const userSchema = new Schema({
   // user:{
@@ -43,6 +44,14 @@ const userSchema = new Schema({
   ]
   ,
 });
+
+userSchema.methods.generateHash = function(password){
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+};
+
+userSchema.methods.validatePassword = function(inputPassword, encryptedPassword) {
+  return bcrypt.compare(inputPassword, encryptedPassword);
+};
 //use this to create a unique object id???
 // schema.path('_id'); 
 const User = mongoose.model("User", userSchema);
