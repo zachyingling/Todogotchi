@@ -45,15 +45,21 @@ router.route("/create/:email/:password").post((req, res) => {
 
 router.route("/login/:email/:password").post((req, res) => {
   sess = req.params;
-  let tempPass = req.params.password;
-  db.User.find({ email: req.params.email, password: db.User.validPassword(tempPass) })
+  let tempUser = new db.User();
+  db.User.find({ email: req.params.email })
     .then(response => {
       if(response.length !== 0) {
-        sess.email = req.params.email;
-        sess.password = req.params.password;
-        res.send(sess);
+        tempUser.validatePassword(req.params.password, response[0].password).then(param => {
+          if(param !== true){
+            res.send("!password");
+          } else {
+            sess.email = req.params.email;
+            sess.password = response.password;
+            res.send(sess);
+          }
+        });
       } else {
-        res.send("not found");
+        res.send("Email not found");
       }
     })
     .catch(err => console.log(err));

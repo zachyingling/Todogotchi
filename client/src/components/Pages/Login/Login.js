@@ -47,8 +47,10 @@ class Login extends React.Component {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     return Axios.post("/api/users/login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
       console.log(axiosResponse);
-      if(axiosResponse.data === "not found"){
+      if(axiosResponse.data === "Email not found"){
         alert("Account info not valid.");
+      } else if(axiosResponse.data === "!password"){
+        alert("Incorrect password");
       } else {
         return this.login();
       }

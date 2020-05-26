@@ -39,11 +39,11 @@ const userSchema = new Schema({
 });
 
 userSchema.methods.generateHash = function(password){
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 };
 
-userSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.password);
+userSchema.methods.validatePassword = function(inputPassword, encryptedPassword) {
+  return bcrypt.compare(inputPassword, encryptedPassword);
 };
 //use this to create a unique object id???
 // schema.path('_id'); 
