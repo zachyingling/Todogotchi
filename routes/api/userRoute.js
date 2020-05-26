@@ -25,14 +25,14 @@ router.route("/create/:email/:password").post((req, res) => {
           db.Pet.create({ moodStatus: 8, energyLevel: 10 })
           .then(data => {
             console.log(data);
-            db.User.create({ email: req.params.email, password: req.params.password, userPets: data._id }).then(createResponse => {
+            let tempUser = new db.User();
+            let tempPass = tempUser.generateHash(req.params.password);
+            db.User.create({ email: req.params.email, password: tempPass, userPets: data._id }).then(createResponse => {
               sess.email = req.params.email;
-              sess.password = req.params.password;
+              sess.password = tempPass;
               res.send(sess);
             });
-
-          })
-
+          });
         } else {
           res.send("already")
         }
@@ -45,7 +45,8 @@ router.route("/create/:email/:password").post((req, res) => {
 
 router.route("/login/:email/:password").post((req, res) => {
   sess = req.params;
-  db.User.find({ email: req.params.email, password: req.params.password })
+  let tempPass = req.params.password;
+  db.User.find({ email: req.params.email, password: db.User.validPassword(tempPass) })
     .then(response => {
       if(response.length !== 0) {
         sess.email = req.params.email;

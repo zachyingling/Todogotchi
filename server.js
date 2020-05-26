@@ -34,7 +34,6 @@ const connection = mongoose.createConnection(MONGODB_URI, dbOptions);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(logger("dev"));
-//broke when i inserted this: 
 app.use(routes);
 
 mongoose.connect(MONGODB_URI, dbOptions);
