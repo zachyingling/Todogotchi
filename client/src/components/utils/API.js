@@ -49,5 +49,9 @@ export default {
 
   updateLogout: function(email){
     return axios.post("api/users/" + email);
+  },
+
+  calculateLogin: function(email){
+    return axios.post("api/users/time/" + email);
   }
 };
