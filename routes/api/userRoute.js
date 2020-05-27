@@ -20,6 +20,28 @@ router.route("/:email").post((req, res) => {
   .catch(err => console.log(err));
 });
 
+router.route("/time/:email").post((req, res) => {
+  db.User.find({email: req.params.email}).then(response => {
+    let userTime = response[0].login;
+    let petID = response[0].userPets[0];
+    let calculatedTimeInMilliseconds = Date.now() - userTime;
+    let calculatedTimeInHours = (((calculatedTimeInMilliseconds) / 1000) / 60) / 60;
+    let decrementedHappiness = calculatedTimeInHours / 2;
+    let currentMood;
+    db.Pet.find({ "_id": petID }).then(response => {
+      currentMood = response[0].moodStatus;
+    }).then(() => {
+      let inputtedMood = currentMood - decrementedHappiness;
+      if(inputtedMood < 0){
+        inputtedMood = 0;
+      }
+      db.Pet.findByIdAndUpdate({ "_id": petID }, { "moodStatus": inputtedMood }).then(response =>{
+        res.send("calculated");
+      }).catch(err => console.log(err));
+    });
+  }).catch(err => console.log(err));
+});
+
 router.route("/create/:email/:password").post((req, res) => {
   sess = req.params;
   // stuff
