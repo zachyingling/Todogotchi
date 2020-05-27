@@ -24,6 +24,12 @@ class Home extends React.Component {
     }).catch(err => console.log(err));
   };
 
+  componentWillMount() {
+    API.calculateLogin(this.state.email).then(response => {
+      console.log(response);
+    }).catch(err => console.log(err));
+  }
+
   componentDidMount() {
     window.addEventListener('beforeunload', this.updateLoginDate, false);
   }
