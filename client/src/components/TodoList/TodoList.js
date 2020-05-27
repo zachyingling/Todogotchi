@@ -28,7 +28,7 @@ export default class TodoList extends React.Component {
 
     state = {
         todos: [],
-        todoToShow: "all",
+        todoToShow: "active",
         toggleAllComplete: true,
         currentUserId: "",
         email: this.props.email,
@@ -247,10 +247,10 @@ export default class TodoList extends React.Component {
     render() {
         let todos = [];
 
-        if (this.state.todoToShow === "all") {
-            todos = this.state.todoArr;
-        }
-        else if (this.state.todoToShow === "active") {
+        // if (this.state.todoToShow === "all") {
+        //     todos = this.state.todoArr;
+        // }
+       if (this.state.todoToShow === "active") {
             // todos = this.state.todos.filter(todo => !todo.complete)
 
             todos = this.state.todoArr.filter(todo => todo.completionStatus !== true)
@@ -313,7 +313,7 @@ export default class TodoList extends React.Component {
                 </div>
                     <div className="col">
                         <div>
-                            <button onClick={() => this.updateTodoToShow("all")}>all</button>
+                            {/* <button onClick={() => this.updateTodoToShow("all")}>all</button> */}
                             <button onClick={() => this.updateTodoToShow("active")}>active</button>
                             <button onClick={() => this.updateTodoToShow("complete")}>complete</button>
                         </div>
@@ -327,7 +327,7 @@ export default class TodoList extends React.Component {
             </button>
                     </div>
                 ) : null}
-                <div>
+                {/* <div>
                     <button
                         onClick={() =>
                             this.setState(state => ({
@@ -341,7 +341,7 @@ export default class TodoList extends React.Component {
                     >
                         toggle all complete: {`${this.state.toggleAllComplete}`}
                     </button>
-                </div>
+                </div> */}
             </div>
         );
     }
