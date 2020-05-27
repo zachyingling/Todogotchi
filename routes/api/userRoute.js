@@ -23,11 +23,18 @@ router.route("/:email").post((req, res) => {
 router.route("/time/:email").post((req, res) => {
   db.User.find({email: req.params.email}).then(response => {
     let userTime = response[0].login;
+    let userId = response[0]._id;
     let petID = response[0].userPets[0];
     let calculatedTimeInMilliseconds = Date.now() - userTime;
     let calculatedTimeInHours = (((calculatedTimeInMilliseconds) / 1000) / 60) / 60;
-    let decrementedHappiness = calculatedTimeInHours / 2;
+    let decrementedHappiness = Math.trunc(calculatedTimeInHours / 2);
+    console.log("decrementedHappiness = " + decrementedHappiness);
     let currentMood;
+    let thisTime = 7200000 - (calculatedTimeInMilliseconds % 7200000);
+    console.log("thisTime = " + thisTime);
+    db.User.findByIdAndUpdate({"_id": userId }, { "elapsedTime": thisTime}).then(response =>{
+        response.send("elapsed time has been calculated");
+    }).catch(err => console.log(err));
     db.Pet.find({ "_id": petID }).then(response => {
       currentMood = response[0].moodStatus;
     }).then(() => {
