@@ -13,6 +13,13 @@ router
   .get(userController.findById)
   .put(userController.update);
 
+router.route("/:email").post((req, res) => {
+  db.User.findOneAndUpdate({email: req.params.email }, { login: Date.now() }).then(response => {
+    res.end();
+  })
+  .catch(err => console.log(err));
+});
+
 router.route("/create/:email/:password").post((req, res) => {
   sess = req.params;
   // stuff
@@ -25,7 +32,7 @@ router.route("/create/:email/:password").post((req, res) => {
           db.Pet.create({ moodStatus: 8, energyLevel: 10 })
           .then(data => {
             console.log(data);
-            let tempUser = new db.User();
+            let tempUser = new db.User(); //new instance so i can access methods
             let tempPass = tempUser.generateHash(req.params.password);
             db.User.create({ email: req.params.email, password: tempPass, userPets: data._id }).then(createResponse => {
               sess.email = req.params.email;
@@ -41,7 +48,6 @@ router.route("/create/:email/:password").post((req, res) => {
     res.send("!valid");
   }
 });
-
 
 router.route("/login/:email/:password").post((req, res) => {
   sess = req.params;

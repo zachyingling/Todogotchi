@@ -47,4 +47,7 @@ export default {
     return axios.put("api/todos/" + id, body)
   }, 
 
+  updateLogout: function(email){
+    return axios.post("api/users/" + email);
+  }
 };
