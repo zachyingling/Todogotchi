@@ -1,15 +1,14 @@
 import React from 'react';
+import HowToPlay from "../HowToPlay/HowToPlay.js"
 
 
 const Logo = props => {
     return(
         <div>
-        <h1>
-                
+            <h1>
                 TODOGotchi
-                </h1>
-            <p> how to play </p>
-        
+            </h1>
+            <HowToPlay/>
         </div>
     )
 }
