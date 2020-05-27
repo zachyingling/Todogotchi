@@ -3,12 +3,15 @@ import Axios from "axios";
 import CreateAccount from "../../CreateAccount/CreateAccount";
 import { BrowserRouter as Redirect, withRouter } from "react-router-dom";
 import "./Login.css";
+import { Col, Row, Container } from "../../Grid";
+import Footer from "../../Footer";
+import petz from "../../../images/sprites/petz.gif";
 
 // css imported from elsewhere not necissariyl from Login folder
 
 // this is our 'first' page that shows a log in/register feature
 class Login extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       email: "",
@@ -35,10 +38,10 @@ class Login extends React.Component {
       [name]: value
     });
   };
-  
+
   handlePassword = event => {
     event.preventDefault();
-    if(this.state.password.length < 8){
+    if (this.state.password.length < 8) {
       return alert("Password needs to be 8 characters");
     } else {
       return this.handleFormSubmit();
@@ -49,9 +52,9 @@ class Login extends React.Component {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     return Axios.post("/api/users/login/" + this.state.email + "/" + this.state.password).then(axiosResponse => {
       console.log(axiosResponse);
-      if(axiosResponse.data === "Email not found"){
+      if (axiosResponse.data === "Email not found") {
         alert("Account info not valid.");
-      } else if(axiosResponse.data === "!password"){
+      } else if (axiosResponse.data === "!password") {
         alert("Incorrect password");
       } else {
         return this.login();
@@ -64,7 +67,7 @@ class Login extends React.Component {
 
 
 
-  
+
   render() {
     const { redirectToReferrer } = this.state;
 
@@ -75,33 +78,51 @@ class Login extends React.Component {
       );
     } else {
       return (
-        <div className="container">
-          <h2 className="text-center">Please Login</h2>
-          <form className="form">
-            <label htmlFor="email">Email:</label>
-            <input
-              value={this.state.email}
-              name="email"
-              id="email"
-              onChange={this.handleInputChange}
-              type="text"
-              placeholder="Email"
-            />
-            <label htmlFor="password">Password(minimum 8 characters):</label>
-            <input
-              value={this.state.password}
-              name="password"
-              onChange={this.handleInputChange}
-              type="password"
-              id="password"
-              placeholder="Password"
-              minLength="8"
-              required
-            />
-            <input type="submit" onClick={this.handlePassword} value="Submit" />
-          </form>
-          <CreateAccount auth={this.props.auth} />
-        </div>
+        <Container fluid>
+          <Row>
+            <Col size="md-12">
+              <h2 className="text-center">Please Login</h2>
+            </Col>
+          </Row>
+          <Row>
+            <Col size="md-12">
+              <form className="form">
+                <label htmlFor="email">Email:</label>
+                <input
+                  value={this.state.email}
+                  name="email"
+                  id="email"
+                  onChange={this.handleInputChange}
+                  type="text"
+                  placeholder="Email"
+                />
+                <label htmlFor="password">Password(minimum 8 characters):</label>
+                <input
+                  value={this.state.password}
+                  name="password"
+                  onChange={this.handleInputChange}
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                  minLength="8"
+                  required
+                />
+                <input type="submit" onClick={this.handlePassword} value="Submit" />
+              </form>
+            </Col>
+          </Row>
+          <Row>
+            <Col size="md-12">
+              <CreateAccount auth={this.props.auth} />
+            </Col>
+          </Row>
+          <Row>
+            <Col size="md-12">
+              <img src={petz} alt="Pet Gif" />
+            </Col>
+          </Row>
+          <Footer />
+        </Container>
       );
     }
   }
