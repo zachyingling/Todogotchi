@@ -1,9 +1,7 @@
 import React from "react";
 import PetWindow from "../../PetWindow/PetWindow";
 import TodoList from "../../TodoList/TodoList"; 
-import ToDoForm from "../../TodoList/TodoForm";
 import API from "../../utils/API";
-import { BrowserRouter as withRouter } from "react-router-dom";
 
 
 // can import css from elsewhere, 
@@ -19,8 +17,22 @@ class Home extends React.Component {
     // using following state values to track/identify current user ID
     email: this.props.auth.email
   };
+  
+  updateLoginDate = () => {
+    API.updateLogout(this.state.email).then(response => {
+      console.log(response);
+    }).catch(err => console.log(err));
+  };
+
+  componentDidMount() {
+    window.addEventListener('beforeunload', this.updateLoginDate, false);
+  }
 
 
+  componentWillUnmount () {
+    window.removeEventListener('beforeunload', this.updateLoginDate, false);
+    this.updateLoginDate();
+  }
 
   render() {
     console.log(this.state);
