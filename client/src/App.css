@@ -4,19 +4,20 @@
 
 
 @font-face {
-  font-family: 'Alphasmoke-OOX6';
+  font-family: 'CandyshopRegular-nOBO';
   font-style: normal;
   font-weight: 400;
-  src: url('../src/fonts/Alphasmoke-OOX6.ttf'); 
+  src: url('../src/fonts/CandyshopRegular-nOBO.ttf'); 
   src: local('Open Sans'), local('OpenSans'),
-       url('../src/fonts/Alphasmoke-OOX6.ttf?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../src/fonts/Alphasmoke-OOX6.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('../src/fonts/Alphasmoke-OOX6.ttf#OpenSans') format('ttf'); /* Legacy iOS */
+       url('../src/fonts/CandyshopRegular-nOBO.ttf?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../src/fonts/CandyshopRegular-nOBO.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../src/fonts/CandyshopRegular-nOBO.ttf#OpenSans') format('ttf'); /* Legacy iOS */
 }
 h1 {
-  font-family: 'Alphasmoke-OOX6', monospace, sans-serif;
+  font-family: 'CandyshopRegular-nOBO', monospace, sans-serif;
   color: #EA1083;
   background-color: #13F8E7; opacity: 1 
+
   
 
   /* will need to specify this for title */

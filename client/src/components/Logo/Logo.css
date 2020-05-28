@@ -1,74 +1,38 @@
 
 
-/* from the js audio player i built */
-/* goal is to display pets.gif and then show blurry pets gif much larger behind it */
-/* or at least just show blurry pets, and later add an animation that brings it into focus (perhaps a future iteration) */
+  
 
-#bg{
-    height:55%;
-    width: 80%;
-    position: absolute;
-    overflow: hidden;
-  
-  }
-  /* bg is the blurry background */
-  #bg img{
-    height: 86%;
-    width:86%;
-    filter:blur(20px); 
-    position: absolute;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    z-index: 1;
-    float: center
-  }
-  
-  #blackLayer{
-    height: 75%;
-    width: 75%;
-    background-color: rgb(25, 47, 33, 0);
-    position: absolute;
-    z-index:99;
-  }
-  
-  
-  #mainAlbum{
-    width:40%;
-    background-color:rgb(255, 255, 255);
-    border-radius: 15px;
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    z-index: 999;
-  }
-  /* the notblurry photo on top is mainAlbum and imageAlbum */
-  #imageAlbum img{
-    height: 180px;
-    width: 100%;
-    margin-top: -5px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-  
-  }
-  
-  #songTitle{
-    width:200px;
-    text-align: center;
-    background-color: rgb(0, 0, 0);
-    border-radius:20%;
-    font-family:'Quantico', sans-serif;
-    font-size: 18px;
-    position: absolute;
-    top:60%;
-    left:50%;
-    transform: translate(-50%, -50%);
-  
-  }
+/* uses candyshop font */
+h1 {
+  text-align: center;
+  min-height: 14vh;
+  font-size: 14vh;
+  margin: 0;
+  padding: 0;
+  display:flex;
+  justify-content: center;
+  /* //maybe use these for footer colors too */
+  background: radial-gradient(cyan,yellow,magenta);
+  text-shadow: -5px 5px 0 rgba(0,255,255,1);
 
 
+  /* the fancy fancy */
+  animation: animate 1.9s ease-in-out;
+  border-style: solid 2px;
 
+}
+
+@keyframes animate{
+  0%,{
+    transform: rotate(-360deg) skew(1deg) translate(0px,1200px);
+    text-shadow: -5px 5px 0 rgba(0,255,255,1);
+  }
+  50%{
+     transform: rotate(-360deg) skew(4deg) translate(0px,0px);
+     text-shadow: -5px 5px 0 rgba(0,255,255,1);
+    /* filter: blur(12px); */
+  }
+}
 
   
   

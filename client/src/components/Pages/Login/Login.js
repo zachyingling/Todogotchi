@@ -118,7 +118,7 @@ class Login extends React.Component {
           </Row>
           <Row>
             <Col size="md-12">
-              <img src={petz} alt="Pet Gif" />
+              <img className="petz" src={petz} alt="Pet Gif" />
             </Col>
           </Row>
           <Footer />
