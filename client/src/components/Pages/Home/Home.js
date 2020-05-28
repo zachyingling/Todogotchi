@@ -2,7 +2,7 @@ import React from "react";
 import PetWindow from "../../PetWindow/PetWindow";
 import TodoList from "../../TodoList/TodoList"; 
 import API from "../../utils/API";
-
+import { Col, Row, Container } from "../../Grid";
 
 // can import css from elsewhere, 
 
@@ -44,14 +44,17 @@ class Home extends React.Component {
     console.log(this.state);
 
     return (
-      <div>
-        <div className="container">
+      <Container fluid>
+        <Row>
+          <Col size="md-6">
+          <TodoList email={this.state.email}/>
+       
+          </Col>
+          <Col size="md-6">
           <PetWindow email={this.state.email}/>
-        </div>
-        <div className="container">
-           <TodoList email={this.state.email}/>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import "../PetWindow/Petwindow.css";
 import {
     CircularProgressbar,
-    // CircularProgressbarWithChildren,
+    CircularProgressbarWithChildren,
     buildStyles
 } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
@@ -47,14 +47,14 @@ class PetWindow extends Component {
 
     decrementRemainingTime = () => {
         var newRemainingTime = this.state.remainingTime - 1000;
-        this.setState({ remainingTime: newRemainingTime});
+        this.setState({ remainingTime: newRemainingTime });
     };
 
     setNewElapsedTime = () => {
         if (this.state.didTimerRunOut === false) {
             API.updateUser(this.state.currentUserId,
                 {
-                      remainingCountdownTime: this.state.remainingTime
+                    remainingCountdownTime: this.state.remainingTime
                 }
             )
                 .then(response => {
@@ -66,7 +66,7 @@ class PetWindow extends Component {
         } else if (this.state.didTimerRunOut === true) {
             API.updateUser(this.state.currentUserId,
                 {
-                      remainingCountdownTime: 0
+                    remainingCountdownTime: 0
                 }
             )
                 .then(response => {
@@ -92,8 +92,8 @@ class PetWindow extends Component {
                         console.log(userResults[i].userPets[0])
                     }
                 };
-               
-                this.setState({ remainingTime: this.state.elapsedTime});
+
+                this.setState({ remainingTime: this.state.elapsedTime });
 
                 this.intervalRemaining = setInterval(() => {
                     this.decrementRemainingTime();
@@ -113,7 +113,7 @@ class PetWindow extends Component {
 
                 setTimeout(() => {
                     this.decrementHappiness();
-                    this.setState({ didTimerRunOut: true});
+                    this.setState({ didTimerRunOut: true });
                     console.log("The countdown has finished");
                     this.intervalHappiness = setInterval(() => {
                         this.getStats();
@@ -124,12 +124,12 @@ class PetWindow extends Component {
                         // post new happiness stat to database
                         console.log("Happiness has decreased to: " + this.state.happiness);
                     }, 7200000);
-                 // for demonstration, set 7200000 above to whatever a minute is
+                    // for demonstration, set 7200000 above to whatever a minute is
                 },
-        
+
                     this.state.elapsedTime);
-                    this.getStats();
-                    console.log(this.state);
+                this.getStats();
+                console.log(this.state);
             })
             .catch(err => console.log(err));
     };
@@ -145,54 +145,54 @@ class PetWindow extends Component {
     };
 
     // API experimentation
-    experiment = () => {
-        console.log("clicked experiment button");
-        // API.getTodos()
-        //     .then(res =>
-        //         console.log(res.data)
-        //         )
-        //         .catch(err => console.log(err));
+    // experiment = () => {
+    //     console.log("clicked experiment button");
+    //     // API.getTodos()
+    //     //     .then(res =>
+    //     //         console.log(res.data)
+    //     //         )
+    //     //         .catch(err => console.log(err));
 
-        API.getUsers()
-            .then(res =>
-                console.log(res.data)
-            )
-            .catch(err => console.log(err));
-    };
+    //     API.getUsers()
+    //         .then(res =>
+    //             console.log(res.data)
+    //         )
+    //         .catch(err => console.log(err));
+    // };
 
-    experiment2 = () => {
-        console.log("clicked experiment 2 button");
-        // API.getTodos()
-        //     .then(res =>
-        //         console.log(res.data)
-        //         )
-        //         .catch(err => console.log(err));
+    // experiment2 = () => {
+    //     console.log("clicked experiment 2 button");
+    //     // API.getTodos()
+    //     //     .then(res =>
+    //     //         console.log(res.data)
+    //     //         )
+    //     //         .catch(err => console.log(err));
 
-        // API.getUsers()
-        // .then(res => {
-        //     console.log(res);
-        //    })
-        //     .catch(err => console.log(err));
+    //     // API.getUsers()
+    //     // .then(res => {
+    //     //     console.log(res);
+    //     //    })
+    //     //     .catch(err => console.log(err));
 
-        // API.updateUser(this.state.currentUserId, 
-        //    {
-        //        userToDos: {
-        //         listItem: "laugh maniacally",
-        //         completionStatus: true,
-        //         lastUpdated: new Date(Date.now())
-        //        }
-        //    })
-        //     .then(response => {
-        //         console.log(response);
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
-        // this.handleTodoSave();
-        this.getStats();
-        console.log(this.state);
+    //     // API.updateUser(this.state.currentUserId, 
+    //     //    {
+    //     //        userToDos: {
+    //     //         listItem: "laugh maniacally",
+    //     //         completionStatus: true,
+    //     //         lastUpdated: new Date(Date.now())
+    //     //        }
+    //     //    })
+    //     //     .then(response => {
+    //     //         console.log(response);
+    //     //     })
+    //     //     .catch(err => {
+    //     //         console.log(err);
+    //     //     })
+    //     // this.handleTodoSave();
+    //     this.getStats();
+    //     console.log(this.state);
 
-    };
+    // };
 
     // API experimentation
     handleTodoSave = () => {
@@ -285,7 +285,7 @@ class PetWindow extends Component {
 
         //     this.state.elapsedTime);
 
-   
+
 
 
         // api experimentation
@@ -400,31 +400,23 @@ class PetWindow extends Component {
         return (
             <Container fluid>
                 <Row>
-                    <Col size="md-12">
+                    {/* <Col size="md-12">
                         <Jumbotron>
                             <h2>Signed in as: {this.state.email}</h2>
                             <h2>Happiness: {this.state.happiness}</h2>
                             <h2>Energy: {this.state.energy}</h2>
                         </Jumbotron>
-                    </Col>
-                    <Col size="md-12">
+                    </Col> */}
+                    {/* <Col size="md-12">
                         <img src={this.state.imgSrc} alt="Pet Gif" />
-                    </Col>
-                    <Col size="md-3">
+                    </Col> */}
+                    {/* <Col size="md-3">
                         <button className="btn btn-primary" onClick={this.incrementEnergy}>
                             Add 4 Energy
                         </button>
-                    </Col>
-                    <Col size="md-3">
-                        <button className="btn btn-success"
-                            onClick={() => {
-                                this.decrementEnergy();
-                                this.incrementHappiness();
-                            }}>
-                            Play/Pet
-                        </button>
-                    </Col>
-                    <Col size="md-3">
+                    </Col> */}
+                    
+                    {/* <Col size="md-3">
                         <button className="btn btn-danger"
                             onClick={() => {
                                 this.experiment();
@@ -439,9 +431,26 @@ class PetWindow extends Component {
                             }}>
                             Experiment 2
                         </button>
+                    </Col> */}
+                    <Col size="md-4">
                     </Col>
                     <Col size="md-4">
-                        <CircularProgressbar
+                     
+                            <CircularProgressbarWithChildren value={this.state.happinessPercent}  minvalue={0}
+                            maxvalue={12}>
+                                {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
+                                
+                                <img
+                                    style={{ width: 150, marginTop: -75}}
+                                    src={this.state.imgSrc}
+                                    alt="Pet Gif"
+                                />
+                                <div style={{ fontSize: 12, marginTop: -5 }}>
+                                    {/* <strong>66%</strong> mate */}
+        </div>
+                            </CircularProgressbarWithChildren>
+              
+                        {/* <CircularProgressbar
                             value={this.state.happinessPercent}
                             minvalue={0}
                             maxvalue={12}
@@ -455,7 +464,20 @@ class PetWindow extends Component {
                                 trailColor: "gold"
                             })}
 
-                        />
+                        /> */}
+                    </Col>
+                    <Col size="md-4">
+                    </Col>
+                    <Col size="md-12">
+                        <div class="text-center">
+                        <button className="btn btn-success"
+                            onClick={() => {
+                                this.decrementEnergy();
+                                this.incrementHappiness();
+                            }}>
+                            Play/Pet
+                        </button>
+                        </div>
                     </Col>
                 </Row>
             </Container>
