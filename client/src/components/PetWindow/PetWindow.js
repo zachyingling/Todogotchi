@@ -445,12 +445,12 @@ class PetWindow extends Component {
                                 {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
                                 
                                 <img
-                                    style={{ width: 150, marginTop: -75}}
+                                    style={{ width: 150, marginTop: -85}}
                                     src={this.state.imgSrc}
                                     alt="Pet Gif"
                                 />
                                 <div style={{ fontSize: 12, marginTop: -5 }}>
-                                    {/* <strong>66%</strong> mate */}
+                                    <strong>Energy:</strong> {this.state.energy}/12
         </div>
                             </CircularProgressbarWithChildren>
               
