@@ -54,7 +54,19 @@ class PetWindow extends Component {
         if (this.state.didTimerRunOut === false) {
             API.updateUser(this.state.currentUserId,
                 {
-                        elapsedtime: this.state.remainingTime
+                      remainingCountdownTime: this.state.remainingTime
+                }
+            )
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        } else if (this.state.didTimerRunOut === true) {
+            API.updateUser(this.state.currentUserId,
+                {
+                      remainingCountdownTime: 0
                 }
             )
                 .then(response => {
@@ -80,19 +92,30 @@ class PetWindow extends Component {
                         console.log(userResults[i].userPets[0])
                     }
                 };
-                console.log(this.state);
+               
                 this.setState({ remainingTime: this.state.elapsedTime});
 
-                this.interval = setInterval(() => {
+                this.intervalRemaining = setInterval(() => {
                     this.decrementRemainingTime();
                     console.log("remaining elapsedTime (this.state.remainingTime): " + this.state.remainingTime);
                 }, 1000);
+
+                this.intervalStats = setInterval(() => {
+                    this.getStats();
+                    // this.setState({ happiness: this.state.happiness - 1 });
+                    // this.decrementHappiness();
+                    this.getAnimationState();
+                    this.setState({ happinessPercent: this.state.happiness * 100 / 12 });
+                    // post new happiness stat to database
+                    console.log("Happiness has decreased to: " + this.state.happiness);
+                }, 500);
 
 
                 setTimeout(() => {
                     this.decrementHappiness();
                     this.setState({ didTimerRunOut: true});
-                    this.interval = setInterval(() => {
+                    console.log("The countdown has finished");
+                    this.intervalHappiness = setInterval(() => {
                         this.getStats();
                         // this.setState({ happiness: this.state.happiness - 1 });
                         this.decrementHappiness();
@@ -101,10 +124,12 @@ class PetWindow extends Component {
                         // post new happiness stat to database
                         console.log("Happiness has decreased to: " + this.state.happiness);
                     }, 7200000);
+                 // for demonstration, set 7200000 above to whatever a minute is
                 },
         
                     this.state.elapsedTime);
-                
+                    this.getStats();
+                    console.log(this.state);
             })
             .catch(err => console.log(err));
     };
@@ -260,15 +285,7 @@ class PetWindow extends Component {
 
         //     this.state.elapsedTime);
 
-        this.interval = setInterval(() => {
-            this.getStats();
-            // this.setState({ happiness: this.state.happiness - 1 });
-            // this.decrementHappiness();
-            this.getAnimationState();
-            this.setState({ happinessPercent: this.state.happiness * 100 / 12 });
-            // post new happiness stat to database
-            console.log("Happiness has decreased to: " + this.state.happiness);
-        }, 1000);
+   
 
 
         // api experimentation
@@ -278,7 +295,10 @@ class PetWindow extends Component {
     };
 
     componentWillUnmount() {
-        clearInterval(this.interval);
+        this.setNewElapsedTime();
+        clearInterval(this.intervalRemaining);
+        clearInterval(this.intervalHappiness);
+        clearInterval(this.intervalStats);
     }
 
     // load user's current energy and happiness stats from database. may need to pass user's id or something, also not sure about data passed in this.setState
