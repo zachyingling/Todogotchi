@@ -4,18 +4,32 @@
 
 
 /* bg is the blurry background */
-.background {
-    background-image: url("/petz.gif");
+
+
+.petz {
+  /* animation: 7s; */
+    filter:blur(14px) grayscale(100%);
+    /* background-image: url("/petz.gif"); */
     height: 86%;
     width:86%;
-    filter:blur(20px); 
-    position: absolute;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    z-index: 1;
-    float: center
- }
+    transition: 1.4s;
+    transition-delay: 10ms;
+
+
+    
+    
+    
+    
+    /* transition-delay: 1s;
+    transition: 3s; */
+       /* filter: sepia(100%); */
+    /* need to increase blue green for gameboy/tomolook */
+  }
+.petz:hover {
+  filter:blur(0px); 
+  height: 86%;
+  width:86%;
+} 
 
  /* need more research on styling in React  */
 #bg{
