@@ -26,7 +26,10 @@ class PetWindow extends Component {
         happinessPercent: 100,
         email: this.props.email,
         currentUserId: "",
-        currentPetId: ""
+        currentPetId: "",
+        elapsedTime: 0,
+        didTimerRunOut: false,
+        remainingTime: 0
     };
 
     // sets appropriate image according to happiness level
@@ -42,6 +45,39 @@ class PetWindow extends Component {
         }
     };
 
+    decrementRemainingTime = () => {
+        var newRemainingTime = this.state.remainingTime - 1000;
+        this.setState({ remainingTime: newRemainingTime});
+    };
+
+    setNewElapsedTime = () => {
+        if (this.state.didTimerRunOut === false) {
+            API.updateUser(this.state.currentUserId,
+                {
+                      remainingCountdownTime: this.state.remainingTime
+                }
+            )
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        } else if (this.state.didTimerRunOut === true) {
+            API.updateUser(this.state.currentUserId,
+                {
+                      remainingCountdownTime: 0
+                }
+            )
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+    };
+
     // determine and set current user ID in state
     setCurrentUser = () => {
         API.getUsers()
@@ -51,23 +87,59 @@ class PetWindow extends Component {
                 var i;
                 for (i = 0; i < userResults.length; i++) {
                     if (userResults[i].email === this.state.email) {
-                        this.setState({ currentUserId: userResults[i]._id, currentPetId: userResults[i].userPets[0] })
+                        this.setState({ currentUserId: userResults[i]._id, currentPetId: userResults[i].userPets[0], elapsedTime: userResults[i].elapsedTime })
                         console.log(userResults[i]._id);
                         console.log(userResults[i].userPets[0])
                     }
                 };
-                console.log(this.state)
+               
+                this.setState({ remainingTime: this.state.elapsedTime});
+
+                this.intervalRemaining = setInterval(() => {
+                    this.decrementRemainingTime();
+                    console.log("remaining elapsedTime (this.state.remainingTime): " + this.state.remainingTime);
+                }, 1000);
+
+                this.intervalStats = setInterval(() => {
+                    this.getStats();
+                    // this.setState({ happiness: this.state.happiness - 1 });
+                    // this.decrementHappiness();
+                    this.getAnimationState();
+                    this.setState({ happinessPercent: this.state.happiness * 100 / 12 });
+                    // post new happiness stat to database
+                    console.log("Happiness has decreased to: " + this.state.happiness);
+                }, 500);
+
+
+                setTimeout(() => {
+                    this.decrementHappiness();
+                    this.setState({ didTimerRunOut: true});
+                    console.log("The countdown has finished");
+                    this.intervalHappiness = setInterval(() => {
+                        this.getStats();
+                        // this.setState({ happiness: this.state.happiness - 1 });
+                        this.decrementHappiness();
+                        this.getAnimationState();
+                        this.setState({ happinessPercent: this.state.happiness * 100 / 12 });
+                        // post new happiness stat to database
+                        console.log("Happiness has decreased to: " + this.state.happiness);
+                    }, 7200000);
+                 // for demonstration, set 7200000 above to whatever a minute is
+                },
+        
+                    this.state.elapsedTime);
+                    this.getStats();
+                    console.log(this.state);
             })
             .catch(err => console.log(err));
     };
 
     getStats = () => {
         API.getPetStats(this.state.currentPetId)
-            .then(res =>
-                {
+            .then(res => {
                 console.log(res);
                 this.setState({ happiness: res.data.moodStatus, energy: res.data.energyLevel });
-                }
+            }
             )
             .catch(err => console.log(err));
     };
@@ -157,29 +229,29 @@ class PetWindow extends Component {
     };
 
     decrementHappiness = () => {
-  
-            var decreasedHappiness;
-            API.getPetStats(this.state.currentPetId)
-                .then(res => {
-                    decreasedHappiness = res.data.moodStatus - 1;
-                    console.log("Happiness decreased to " + decreasedHappiness);
-                    if (decreasedHappiness >= 0) {
-                        API.saveHappiness(this.state.currentPetId,
-                            {
-                                moodStatus: decreasedHappiness
-                            }
-                        )
-                            .then(response => {
-                                console.log(response);
-                            })
-                            .catch(err => {
-                                console.log(err);
-                            })
-                    } else {
-                        console.log("Pet is already the saddest.")
-                    }
-                })
-                .catch(err => console.log(err));
+
+        var decreasedHappiness;
+        API.getPetStats(this.state.currentPetId)
+            .then(res => {
+                decreasedHappiness = res.data.moodStatus - 1;
+                console.log("Happiness decreased to " + decreasedHappiness);
+                if (decreasedHappiness >= 0) {
+                    API.saveHappiness(this.state.currentPetId,
+                        {
+                            moodStatus: decreasedHappiness
+                        }
+                    )
+                        .then(response => {
+                            console.log(response);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                } else {
+                    console.log("Pet is already the saddest.")
+                }
+            })
+            .catch(err => console.log(err));
     };
 
 
@@ -188,22 +260,32 @@ class PetWindow extends Component {
 
         // get current happiness and energy stats from the database. 
         // this.loadStats();
-    
+
+
+        // REMEMBER TOMORROW: run setTimeout function only after this.setCurrentUser() runs, I think settimeout is running when it still thinks this.state.elapsedTime is the default 0 as defined above. Maybe a .then function?
+
+
+
+
         this.setCurrentUser();
         this.getStats();
 
+        // setTimeout(() => {
+        //     this.decrementHappiness();
+        //     this.interval = setInterval(() => {
+        //         this.getStats();
+        //         // this.setState({ happiness: this.state.happiness - 1 });
+        //         this.decrementHappiness();
+        //         this.getAnimationState();
+        //         this.setState({ happinessPercent: this.state.happiness * 100 / 12 });
+        //         // post new happiness stat to database
+        //         console.log("Happiness has decreased to: " + this.state.happiness);
+        //     }, 1000);
+        // },
 
+        //     this.state.elapsedTime);
 
-
-        this.interval = setInterval(() => {
-            this.getStats();
-            // this.setState({ happiness: this.state.happiness - 1 });
-            this.decrementHappiness();
-            this.getAnimationState();
-            this.setState({ happinessPercent: this.state.happiness * 100 / 12 });
-            // post new happiness stat to database
-            console.log("Happiness has decreased to: " + this.state.happiness);
-        }, 1000);
+   
 
 
         // api experimentation
@@ -213,7 +295,10 @@ class PetWindow extends Component {
     };
 
     componentWillUnmount() {
-        clearInterval(this.interval);
+        this.setNewElapsedTime();
+        clearInterval(this.intervalRemaining);
+        clearInterval(this.intervalHappiness);
+        clearInterval(this.intervalStats);
     }
 
     // load user's current energy and happiness stats from database. may need to pass user's id or something, also not sure about data passed in this.setState
@@ -245,35 +330,35 @@ class PetWindow extends Component {
     decrementEnergy = () => {
 
         API.getPetStats(this.state.currentPetId)
-        .then(res => {
-            console.log(res);
-            if (res.data.energyLevel === 0) {
-                console.log("You have no energy to play!");
-            }  else {
-                var newEnergy = res.data.energyLevel - 1;
-                var newHappiness = res.data.moodStatus + 1;
-                console.log("Energy level decreased to " + newEnergy);
-                console.log("Happiness level increased to " + newHappiness);
-                API.saveEnergy(this.state.currentPetId,
-                    {
-                        moodStatus: newHappiness,
-                        energyLevel: newEnergy
-                    }
-                )
-                    .then(response => {
-                        console.log(response);
-                        this.getStats();
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
+            .then(res => {
+                console.log(res);
+                if (res.data.energyLevel === 0) {
+                    console.log("You have no energy to play!");
+                } else {
+                    var newEnergy = res.data.energyLevel - 1;
+                    var newHappiness = res.data.moodStatus + 1;
+                    console.log("Energy level decreased to " + newEnergy);
+                    console.log("Happiness level increased to " + newHappiness);
+                    API.saveEnergy(this.state.currentPetId,
+                        {
+                            moodStatus: newHappiness,
+                            energyLevel: newEnergy
+                        }
+                    )
+                        .then(response => {
+                            console.log(response);
+                            this.getStats();
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                }
+
+
+
             }
-           
-
-
-        }
-        )
-        .catch(err => console.log(err));
+            )
+            .catch(err => console.log(err));
 
 
         // if (this.state.energy > 0) {
@@ -362,14 +447,14 @@ class PetWindow extends Component {
                             maxvalue={12}
                             counterClockwise={true}
                             strokeWidth={50}
-                             // styles={buildStyles({
+                            // styles={buildStyles({
                             // strokeLinecap: "butt"
                             styles={buildStyles({
                                 textColor: "red",
                                 pathColor: "turquoise",
                                 trailColor: "gold"
-                              })}
-    
+                            })}
+
                         />
                     </Col>
                 </Row>

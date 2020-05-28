@@ -23,22 +23,48 @@ router.route("/:email").post((req, res) => {
 router.route("/time/:email").post((req, res) => {
   db.User.find({email: req.params.email}).then(response => {
     let userTime = response[0].login;
+    let userId = response[0]._id;
+    let remainingCountdown = response[0].remainingCountdownTime;
     let petID = response[0].userPets[0];
     let calculatedTimeInMilliseconds = Date.now() - userTime;
     let calculatedTimeInHours = (((calculatedTimeInMilliseconds) / 1000) / 60) / 60;
-    let decrementedHappiness = calculatedTimeInHours / 2;
+    let decrementedHappiness = Math.trunc(calculatedTimeInHours / 2);
+    console.log("decrementedHappiness = " + decrementedHappiness);
     let currentMood;
-    db.Pet.find({ "_id": petID }).then(response => {
-      currentMood = response[0].moodStatus;
-    }).then(() => {
-      let inputtedMood = currentMood - decrementedHappiness;
-      if(inputtedMood < 0){
-        inputtedMood = 0;
-      }
-      db.Pet.findByIdAndUpdate({ "_id": petID }, { "moodStatus": inputtedMood }).then(response =>{
-        res.send("calculated");
-      }).catch(err => console.log(err));
-    });
+    let thisTime = 7200000 - (calculatedTimeInMilliseconds % 7200000);
+    console.log("thisTime = " + thisTime);
+    // for demonstration, set thisTime in line 38 to 0.
+    if (remainingCountdown === 0) {
+      db.User.findByIdAndUpdate({"_id": userId }, { "elapsedTime": thisTime}).then(response =>{
+        db.Pet.find({ "_id": petID }).then(response => {
+          currentMood = response[0].moodStatus;
+        }).then(() => {
+          let inputtedMood = currentMood - decrementedHappiness;
+          if(inputtedMood < 0){
+            inputtedMood = 0;
+          }
+          db.Pet.findByIdAndUpdate({ "_id": petID }, { "moodStatus": inputtedMood }).then(response =>{
+            res.send("elapsed time has been calculated");
+          }).catch(err => console.log(err));
+        });
+    }).catch(err => console.log(err));
+    } else {
+      db.User.findByIdAndUpdate({"_id": userId }, { "elapsedTime": remainingCountdown}).then(response =>{
+        db.Pet.find({ "_id": petID }).then(response => {
+          currentMood = response[0].moodStatus;
+        }).then(() => {
+          let inputtedMood = currentMood - decrementedHappiness;
+          if(inputtedMood < 0){
+            inputtedMood = 0;
+          }
+          db.Pet.findByIdAndUpdate({ "_id": petID }, { "moodStatus": inputtedMood }).then(response =>{
+            res.send("elapsed time has been set to remaining time");
+          }).catch(err => console.log(err));
+        });
+    }).catch(err => console.log(err));
+    };
+  
+    
   }).catch(err => console.log(err));
 });
 

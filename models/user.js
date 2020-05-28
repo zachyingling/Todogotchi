@@ -22,6 +22,14 @@ const userSchema = new Schema({
     timestamps: true,
     required: true
   },
+  elapsedTime: {
+    type: Number,
+    default: 0
+  },
+  remainingCountdownTime: {
+    type: Number,
+    default: 0
+  },
   // record last logout through API call in componentWillMount in PetWindow component.
   // lastLogout: {
   //   type: Date,
