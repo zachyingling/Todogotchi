@@ -437,7 +437,11 @@ class PetWindow extends Component {
                     <Col size="md-4">
                      
                             <CircularProgressbarWithChildren value={this.state.happinessPercent}  minvalue={0}
-                            maxvalue={12}>
+                            maxvalue={12} counterClockwise={true} styles={buildStyles({
+                                textColor: "red",
+                                pathColor: "turquoise",
+                                trailColor: "gold"
+                            })}>
                                 {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
                                 
                                 <img
