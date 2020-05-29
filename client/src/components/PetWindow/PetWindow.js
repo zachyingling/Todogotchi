@@ -477,6 +477,7 @@ class PetWindow extends Component {
                                         }}>
                                         Pet
                         </button>
+                        {/* pet button used to be Pet/Play */}
                                 </div>
                             </div>
                             
