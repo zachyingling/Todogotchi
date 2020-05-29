@@ -69,4 +69,19 @@
 
 }
 
+
+
+.checkmarkandx {
+    background-color:black;
+    color:white;
+    right: 0;
+    border-radius:30%;
+    position: center;
+     
+    
+}
+.checkmarkandx:hover{
+    background-color:magenta;
+    /* bleed:magneta; */
+}
 /* ☑ for laaater */
