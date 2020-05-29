@@ -1,8 +1,26 @@
 .circle {
-    border-radius:40%;
+    border-radius:50%;
     background-color:magenta;
+    color: white;
+    text-shadow: -3px 3px 0 rgba(255,0,255,1);
+
+    
     
 
+}
+
+.todoaddsbutton {
+    border-radius:50%;
+    background-color: mediumseagreen;
+    text-shadow: -5px 5px 0 mediumseagreen;
+
+    color: white;
+    
+
+}
+
+.text{
+    width: 90%;
 }
 
 .tacos{
@@ -13,6 +31,7 @@
         padding: 5;
         display:flex;
         justify-content: left;
+        color: yellow;
         background: linear-gradient(yellow,cyan, magenta);
         text-shadow: -5px 5px 0 rgba(0,255,255,1);
       
@@ -28,14 +47,26 @@
     padding: 5;
     display:flex;
     justify-content: left;
-    background: linear-gradient(yellow,cyan, magenta);
-    text-shadow: -5px 5px 0 rgba(0,255,255,1);
+    color: magenta;
+    /* background: linear-gradient(yellow,cyan, magenta); */
+    text-shadow: -2px 2px 4px rgba(255,255,0,1);
+    /* text-shadow: -8px 8px 0 rgba(255,255,0,1); */
+    /* text-shadow: -12px 12px 0 rgba(255,0,255,1); */
+
+
   
   
     border-style: solid 5px;
 }
 
+/* todos left font and style */
+.todosleftfont{
 
+    color:magenta;
+    text-shadow:-8px 8px 1px yellow;
+    transform: rotate(-8deg) skew(15deg) translate(3px,3px);
+    /* transform: rotate(0deg) skew(0deg) translate(0px,0px); */
 
+}
 
 /* ☑ for laaater */

@@ -514,12 +514,12 @@ class PetWindow extends Component {
                                         {/* minigame area */}
                                         {/* <a href="https://benmulhollandpsl.github.io/todogotfree/"" */}
 
-                                        <button onClick={() => window.open("https://benmulhollandpsl.github.io/todogotfree/", 'targetWindow',
+                                        <button class="fancy" onClick={() => window.open("https://benmulhollandpsl.github.io/todogotfree/", 'targetWindow',
                                             `status=no,
                                     menubar=no,
                                     width=550,
                                     height=550`)
-                                        }>MINI Game event</button>
+                                        }>MINI Game!</button>
                                         {/* return false;"Popup link</a>" */}
                                     </div>
                                 </div>
