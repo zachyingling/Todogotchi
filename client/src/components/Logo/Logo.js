@@ -9,7 +9,7 @@ const Logo = props => {
             <h1>
                 TODO-Gotchi
             </h1>
-            <HowToPlay/>
+            {/* <HowToPlay/> */}
         </div>
     )
 }

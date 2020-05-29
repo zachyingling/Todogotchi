@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import CreateAccountForm from "../CreateAccountForm/CreateAccountForm";
 
 function CreateAccount (props) {
@@ -10,9 +10,9 @@ function CreateAccount (props) {
 
   return (
     <>
-      <button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={handleShow}>
         Create Account
-      </button>
+      </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

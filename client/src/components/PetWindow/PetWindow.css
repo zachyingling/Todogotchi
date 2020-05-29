@@ -5,3 +5,8 @@
 .petBody {
     margin-top: -15;
 }
+.petButton {
+    background-color: cyan;
+    border: none;
+    color: black;
+}
