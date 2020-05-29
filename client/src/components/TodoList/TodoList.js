@@ -262,12 +262,11 @@ export default class TodoList extends React.Component {
 
 
         return (
-            <div className="container">
+            <div className="container shadow rounded p-2">
                 <div className="row">
-                    <div className="col">
+                    {/* <div className="col">
                 <div>
-                    {/* minigame area */}
-                    {/* <a href="https://benmulhollandpsl.github.io/todogotfree/"" */}
+               
 
                     <button onClick={() => window.open("https://benmulhollandpsl.github.io/todogotfree/", 'targetWindow',
                         `status=no,
@@ -275,9 +274,9 @@ export default class TodoList extends React.Component {
                                     width=550,
                                     height=550`)
                     }>MINI Game event</button>
-                    {/* return false;"Popup link</a>" */}
+                    return false;"Popup link</a>"
                 </div>
-                </div>
+                </div> */}
                 <div className="col">
                 <TodoForm onSubmit={this.addTodo} />
                 </div>

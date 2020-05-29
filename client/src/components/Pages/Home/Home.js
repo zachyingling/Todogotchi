@@ -45,7 +45,7 @@ class Home extends React.Component {
 
     return (
       <Container fluid>
-        <Row>
+        <div class="row align-items-center">
           <Col size="md-6">
           <TodoList email={this.state.email}/>
        
@@ -53,7 +53,7 @@ class Home extends React.Component {
           <Col size="md-6">
           <PetWindow email={this.state.email}/>
           </Col>
-        </Row>
+        </div>
       </Container>
     );
   }

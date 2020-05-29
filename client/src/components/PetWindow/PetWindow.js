@@ -13,6 +13,7 @@ import meh from "../../images/sprites/phoebe-meh-4fps.gif";
 import pissy from "../../images/sprites/phoebe-pissy.gif";
 import sad from "../../images/sprites/phoebe-sad.gif";
 import API from "../utils/API";
+import "./PetWindow.css";
 
 
 
@@ -29,7 +30,8 @@ class PetWindow extends Component {
         currentPetId: "",
         elapsedTime: 0,
         didTimerRunOut: false,
-        remainingTime: 0
+        remainingTime: 0,
+        showGame: "card-body pt-0 d-none pt-10"
     };
 
     // sets appropriate image according to happiness level
@@ -102,6 +104,11 @@ class PetWindow extends Component {
 
                 this.intervalStats = setInterval(() => {
                     this.getStats();
+                    if (this.state.happiness === 12) {
+                        this.setState({ showGame: "card-body pt-10" })
+                    } else {
+                        this.setState({ showGame: "card-body pt-0 d-none" })
+                    };
                     // this.setState({ happiness: this.state.happiness - 1 });
                     // this.decrementHappiness();
                     this.getAnimationState();
@@ -336,7 +343,11 @@ class PetWindow extends Component {
                     console.log("You have no energy to play!");
                 } else {
                     var newEnergy = res.data.energyLevel - 1;
-                    var newHappiness = res.data.moodStatus + 1;
+                    if (res.data.moodStatus >= 12) {
+                        var newHappiness = 12
+                    } else {
+                        var newHappiness = res.data.moodStatus + 1;
+                    };
                     console.log("Energy level decreased to " + newEnergy);
                     console.log("Happiness level increased to " + newHappiness);
                     API.saveEnergy(this.state.currentPetId,
@@ -376,22 +387,22 @@ class PetWindow extends Component {
     };
 
     // will increase pet's happiness when user plays with it/pets it
-    incrementHappiness = () => {
-        if (this.state.happiness < 12) {
-            this.setState({ happiness: this.state.happiness + 1 });
+    // incrementHappiness = () => {
+    //     if (this.state.happiness < 12) {
+    //         this.setState({ happiness: this.state.happiness + 1 });
 
-            // post new happiness stat to database. unsure if passing correct data
-            // API.saveHappiness({ happiness: this.state.happiness })
-            //     .then(res => this.loadStats())
-            //     .catch(err => console.log(err));
+    //         // post new happiness stat to database. unsure if passing correct data
+    //         // API.saveHappiness({ happiness: this.state.happiness })
+    //         //     .then(res => this.loadStats())
+    //         //     .catch(err => console.log(err));
 
-            console.log("Happiness has increased to: " + this.state.happiness);
-        } else {
-            console.log("Pet's health is already full. Proof: " + this.state.happiness)
-            // should maybe alert player that pet's happiness is full
-        }
+    //         console.log("Happiness has increased to: " + this.state.happiness);
+    //     } else {
+    //         console.log("Pet's health is already full. Proof: " + this.state.happiness)
+    //         // should maybe alert player that pet's happiness is full
+    //     }
 
-    };
+    // };
 
 
 
@@ -415,7 +426,7 @@ class PetWindow extends Component {
                             Add 4 Energy
                         </button>
                     </Col> */}
-                    
+
                     {/* <Col size="md-3">
                         <button className="btn btn-danger"
                             onClick={() => {
@@ -435,25 +446,52 @@ class PetWindow extends Component {
                     <Col size="md-4">
                     </Col>
                     <Col size="md-4">
-                     
-                            <CircularProgressbarWithChildren value={this.state.happinessPercent}  minvalue={0}
-                            maxvalue={12} counterClockwise={true} styles={buildStyles({
-                                textColor: "red",
-                                pathColor: "turquoise",
-                                trailColor: "gold"
-                            })}>
-                                {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
-                                
-                                <img
-                                    style={{ width: 150, marginTop: -85}}
-                                    src={this.state.imgSrc}
-                                    alt="Pet Gif"
-                                />
-                                <div style={{ fontSize: 12, marginTop: -5 }}>
-                                    <strong>Energy:</strong> {this.state.energy}/12
-        </div>
-                            </CircularProgressbarWithChildren>
-              
+                        <div class="card w-100 bg-transparent shadow rounded-pill">
+                            <div class="card-body">
+                                <CircularProgressbarWithChildren value={this.state.happinessPercent} minvalue={0}
+                                    maxvalue={12} counterClockwise={true} styles={buildStyles({
+                                        textColor: "red",
+                                        pathColor: "turquoise",
+                                        trailColor: "gold"
+                                    })}>
+                                    {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
+
+                                    <img
+                                        style={{ width: 150, marginTop: -85 }}
+                                        src={this.state.imgSrc}
+                                        alt="Pet Gif"
+                                    />
+
+                                </CircularProgressbarWithChildren>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="text-center">
+                                    <div>
+                                        <strong>Happiness:</strong> {(this.state.happinessPercent).toFixed(0)}%<br>
+                                        </br> <p><strong>Energy:</strong> {this.state.energy}/12</p>
+                                    </div>
+                                    <button className="btn btn-success"
+                                        onClick={() => {
+                                            this.decrementEnergy();
+                                            // this.incrementHappiness();
+                                        }}>
+                                        Play/Pet
+                        </button>
+                                </div>
+                            </div>
+                            
+                            {/* <div class="card-body mb-3">
+                            <div class="text-center">
+                            <button className="btn btn-success"
+                                onClick={() => {
+                                    this.decrementEnergy();
+                                    this.incrementHappiness();
+                                }}>
+                                Play/Pet
+                        </button>
+                        </div>
+                            </div> */}
+                        </div>
                         {/* <CircularProgressbar
                             value={this.state.happinessPercent}
                             minvalue={0}
@@ -469,19 +507,27 @@ class PetWindow extends Component {
                             })}
 
                         /> */}
+                        <div class={this.state.showGame}>
+                                <div class="text-center">
+                                    <div>
+                                        {/* minigame area */}
+                                        {/* <a href="https://benmulhollandpsl.github.io/todogotfree/"" */}
+
+                                        <button onClick={() => window.open("https://benmulhollandpsl.github.io/todogotfree/", 'targetWindow',
+                                            `status=no,
+                                    menubar=no,
+                                    width=550,
+                                    height=550`)
+                                        }>MINI Game event</button>
+                                        {/* return false;"Popup link</a>" */}
+                                    </div>
+                                </div>
+                            </div>
                     </Col>
                     <Col size="md-4">
                     </Col>
                     <Col size="md-12">
-                        <div class="text-center">
-                        <button className="btn btn-success"
-                            onClick={() => {
-                                this.decrementEnergy();
-                                this.incrementHappiness();
-                            }}>
-                            Play/Pet
-                        </button>
-                        </div>
+
                     </Col>
                 </Row>
             </Container>
