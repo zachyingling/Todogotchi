@@ -1,9 +1,6 @@
 
-
-  
-
 /* uses candyshop font */
-h1 {
+.topLogo {
   text-align: center;
   min-height: 14vh;
   font-size: 14vh;
