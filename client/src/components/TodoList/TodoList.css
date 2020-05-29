@@ -1,3 +1,40 @@
+.circle {
+    border-radius:40%;
+    background-color:magenta;
+    
+
+}
+
+.tacos{
+    
+        text-align: left;
+        text-justify: left;
+        margin: 2;
+        padding: 5;
+        display:flex;
+        justify-content: left;
+        background: linear-gradient(yellow,cyan, magenta);
+        text-shadow: -5px 5px 0 rgba(0,255,255,1);
+      
+      
+        border-style: solid 5px;
+      
+      }
+      
+.sueprtacos{
+    text-align: left;
+    text-justify: left;
+    margin: 2;
+    padding: 5;
+    display:flex;
+    justify-content: left;
+    background: linear-gradient(yellow,cyan, magenta);
+    text-shadow: -5px 5px 0 rgba(0,255,255,1);
+  
+  
+    border-style: solid 5px;
+}
+
 
 
 
