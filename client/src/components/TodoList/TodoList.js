@@ -2,7 +2,7 @@ import React from "react";
 import TodoForm from "./TodoForm";
 import Todo from './Todo';
 import API from '../utils/API';
-
+import "./TodoList.css";
 // import Axios from "axios";
 // import CreateAccount from "../../CreateAccount/CreateAccount";
 
@@ -263,7 +263,7 @@ export default class TodoList extends React.Component {
 
         return (
             <div className="container shadow rounded p-2">
-                <div className="row">
+                <div className="col tacos">
                     {/* <div className="col">
                 <div>
                
@@ -281,14 +281,14 @@ export default class TodoList extends React.Component {
                 <TodoForm onSubmit={this.addTodo} />
                 </div>
                 </div>
-                <div className="row " style={{"margin-top": "3vh", "margin-bottom": "3vh"}}>
+                <div className="col" style={{"margin-top": "3vh", "margin-bottom": "3vh"}}>
 
 
 
 
                     
                     {todos.map(todo => (
-                        <div className="col">
+                        <div className="col sueprtacos">
                         <Todo
                             // {this.state.todos.map(todo => (
                             key={todo._id}
@@ -313,7 +313,7 @@ export default class TodoList extends React.Component {
                     <div className="col">
                         <div>
                             {/* <button onClick={() => this.updateTodoToShow("all")}>all</button> */}
-                            <button onClick={() => this.updateTodoToShow("active")}>active</button>
+                            <button type="button" class="btn btn-primary circle"  onClick={() => this.updateTodoToShow("active")}>active</button>
                             <button onClick={() => this.updateTodoToShow("complete")}>complete</button>
                         </div>
                     </div>

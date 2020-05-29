@@ -8,7 +8,7 @@
 
 .petz {
   /* animation: 7s; */
-    filter:blur(14px) grayscale(100%);
+    filter:blur(14px) invert(100%);
     /* background-image: url("/petz.gif"); */
     height: 86%;
     width:86%;

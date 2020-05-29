@@ -5,8 +5,8 @@
 /* uses candyshop font */
 h1 {
   text-align: center;
-  min-height: 14vh;
-  font-size: 14vh;
+  min-height: 12vh;
+  font-size: 12vh;
   margin: 0;
   padding: 0;
   display:flex;
@@ -17,14 +17,14 @@ h1 {
 
 
   /* the fancy fancy */
-  animation: animate 1.9s ease-in-out;
+  animation: animate 2.4s ease-in-out;
   border-style: solid 2px;
 
 }
 
 @keyframes animate{
-  0%,{
-    transform: rotate(-360deg) skew(1deg) translate(0px,1200px);
+  0%{
+    transform: rotate(-360deg) skew(1deg) translate(1px,900px);
     text-shadow: -5px 5px 0 rgba(0,255,255,1);
   }
   50%{
