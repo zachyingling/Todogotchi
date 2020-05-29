@@ -1,8 +1,9 @@
 import React from "react";
 import PetWindow from "../../PetWindow/PetWindow";
-import TodoList from "../../TodoList/TodoList"; 
+import TodoList from "../../TodoList/TodoList";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../Grid";
+import HowToPlay from "../../HowToPlay/HowToPlay.js";
 
 // can import css from elsewhere, 
 
@@ -17,7 +18,7 @@ class Home extends React.Component {
     // using following state values to track/identify current user ID
     email: this.props.auth.email
   };
-  
+
   updateLoginDate = () => {
     API.updateLogout(this.state.email).then(response => {
       console.log(response);
@@ -35,7 +36,7 @@ class Home extends React.Component {
   }
 
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('beforeunload', this.updateLoginDate, false);
     this.updateLoginDate();
   }
@@ -44,17 +45,24 @@ class Home extends React.Component {
     console.log(this.state);
 
     return (
-      <Container fluid>
-        <div class="row align-items-center">
-          <Col size="md-6">
-          <TodoList email={this.state.email}/>
-       
-          </Col>
-          <Col size="md-6">
-          <PetWindow email={this.state.email}/>
-          </Col>
-        </div>
-      </Container>
+      <div>
+        <br>
+        </br>
+        <Container fluid>
+          <Row>
+            <Col size="md-6">
+
+              <TodoList email={this.state.email} />
+              <div class="pt-2">
+                <HowToPlay />
+              </div>
+            </Col>
+            <Col size="md-6">
+              <PetWindow email={this.state.email} />
+            </Col>
+          </Row>
+        </Container>
+      </div>
     );
   }
 }
