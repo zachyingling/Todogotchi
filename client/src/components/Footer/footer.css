@@ -1,0 +1,11 @@
+.footer {
+    text-align: center;
+    min-height: 14vh;
+    font-size: 14vh;
+    margin-top: 100px;
+    padding: 0;
+    display:flex;
+    justify-content: center;
+    /* //maybe use these for footer colors too */
+    /* text-shadow: -5px 5px 0 rgba(0,255,255,1); */
+  }
