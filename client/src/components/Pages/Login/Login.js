@@ -6,6 +6,7 @@ import "./Login.css";
 import { Col, Row, Container } from "../../Grid";
 import Footer from "../../Footer";
 import petz from "../../../images/sprites/petz.gif";
+import HowToPlay from "../../HowToPlay/HowToPlay.js";
 
 // css imported from elsewhere not necissariyl from Login folder
 
@@ -86,6 +87,7 @@ class Login extends React.Component {
           </Row>
           <Row>
             <Col size="md-12">
+              <div class="text-center">
               <form className="form">
                 <label htmlFor="email">Email:</label>
                 <input
@@ -96,7 +98,7 @@ class Login extends React.Component {
                   type="text"
                   placeholder="Email"
                 />
-                <label htmlFor="password">Password(minimum 8 characters):</label>
+                <label class="pl-2" htmlFor="password">Password (min 8 characters):</label>
                 <input
                   value={this.state.password}
                   name="password"
@@ -109,16 +111,28 @@ class Login extends React.Component {
                 />
                 <input type="submit" onClick={this.handlePassword} value="Submit" />
               </form>
+              </div>
             </Col>
           </Row>
           <Row>
             <Col size="md-12">
+              <div class="text-center">
               <CreateAccount auth={this.props.auth} />
+              </div>
             </Col>
           </Row>
           <Row>
             <Col size="md-12">
+              <div class="text-center p-1">
+              <HowToPlay/>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col size="md-12">
+              <div class="text-center p-1">
               <img className="petz" src={petz} alt="Pet Gif" />
+              </div>
             </Col>
           </Row>
           <Footer />

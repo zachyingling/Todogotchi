@@ -470,13 +470,14 @@ class PetWindow extends Component {
                                         <strong>Happiness:</strong> {(this.state.happinessPercent).toFixed(0)}%<br>
                                         </br> <p><strong>Energy:</strong> {this.state.energy}/12</p>
                                     </div>
-                                    <button className="btn btn-success"
+                                    <button className="btn btn-primary rounded-circle petButton"
                                         onClick={() => {
                                             this.decrementEnergy();
                                             // this.incrementHappiness();
                                         }}>
-                                        Play/Pet
+                                        Pet
                         </button>
+                        {/* pet button used to be Pet/Play */}
                                 </div>
                             </div>
                             
