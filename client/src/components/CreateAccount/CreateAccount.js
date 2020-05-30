@@ -10,7 +10,7 @@ function CreateAccount (props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="info" onClick={handleShow}>
         Create Account
       </Button>
 

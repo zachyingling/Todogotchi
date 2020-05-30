@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
+import "../TodoList/TodoList.css";
 
 function HowToPlay () {
   const [show, setShow] = React.useState(false);
@@ -8,7 +9,7 @@ function HowToPlay () {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button class="secondfancy" variant="warning" onClick={handleShow}>
         How To Play
       </Button>
 

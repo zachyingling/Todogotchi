@@ -306,15 +306,15 @@ export default class TodoList extends React.Component {
 
                 <div className="row">
                     <div className="col">
-                <div>
-                    todos left: {this.state.todoArr.filter(todo => !todo.completionStatus).length}
+                <div class="todosleftfont">
+                    <strong>todos left</strong>: {this.state.todoArr.filter(todo => !todo.completionStatus).length}
                 </div>
                 </div>
                     <div className="col">
                         <div>
                             {/* <button onClick={() => this.updateTodoToShow("all")}>all</button> */}
-                            <button type="button" class="btn btn-primary circle"  onClick={() => this.updateTodoToShow("active")}>active</button>
-                            <button onClick={() => this.updateTodoToShow("complete")}>complete</button>
+                            <button type="button" class="btn btn-warning circle"  onClick={() => this.updateTodoToShow("active")}>active</button>
+                            <button type="button" class="btn btn-warning circle" onClick={() => this.updateTodoToShow("complete")}>complete</button>
                         </div>
                     </div>
                 </div>
