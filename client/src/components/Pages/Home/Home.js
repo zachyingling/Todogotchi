@@ -4,7 +4,8 @@ import TodoList from "../../TodoList/TodoList";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../Grid";
 import HowToPlay from "../../HowToPlay/HowToPlay.js";
-
+import github from "../../../images/background/github.png"
+ 
 // can import css from elsewhere, 
 
 // this  is our homepage which displays pet after login screen
@@ -62,9 +63,18 @@ class Home extends React.Component {
             </Col>
           </Row>
         </Container>
+
+        <footer>
+        <div className="footer-center" align="center">
+          <h6>Proudly Built Using React.js</h6>
+          <a href="https://github.com/zachyingling/project-3"><img src= {github} height= "50px" width= "50px" align="center"/></a>
+          </div>
+      </footer>
       </div>
     );
   }
 }
 
 export default Home;
+
+
