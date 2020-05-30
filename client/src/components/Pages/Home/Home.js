@@ -5,6 +5,7 @@ import API from "../../utils/API";
 import { Col, Row, Container } from "../../Grid";
 import HowToPlay from "../../HowToPlay/HowToPlay.js";
 import github from "../../../images/background/github.png"
+import { Button, Modal } from "react-bootstrap";
  
 // can import css from elsewhere, 
 

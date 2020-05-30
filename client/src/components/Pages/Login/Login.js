@@ -6,7 +6,7 @@ import "./Login.css";
 import { Col, Row, Container } from "../../Grid";
 import Footer from "../../Footer";
 import petz from "../../../images/sprites/petz.gif";
-import HowToPlay from "../../HowToPlay/HowToPlay.js";
+import LoginButton from "../../LoginButton/LoginButton.js";
 
 // css imported from elsewhere not necissariyl from Login folder
 
@@ -124,7 +124,7 @@ class Login extends React.Component {
           <Row>
             <Col size="md-12">
               <div class="text-center p-1">
-              <HowToPlay/>
+              <LoginButton/>
               </div>
             </Col>
           </Row>
