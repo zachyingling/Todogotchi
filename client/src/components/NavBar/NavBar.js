@@ -14,3 +14,5 @@ const NavBar = props => {
     )
 }
 export default NavBar;
+
+// currently not using a NavBar
