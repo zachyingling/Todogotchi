@@ -24,7 +24,7 @@ function HowToPlay () {
 <br></br><br></br>
 For existing users: enter your email and password, then press the submit button.
 <br></br><br></br>
-To begin: create and account using your email address and a unique password of 8 alphabet characters, 
+To begin: create and account using your email address and a password of 8 characters.
 
         </Modal.Body>
         <Modal.Footer>
