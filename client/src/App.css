@@ -32,7 +32,10 @@ h1 {
 
 
   width: 100vw;
-  height: 100vh;
+  height: 180vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   background-color: blue; /* For browsers that do not support gradients */
   background-image: linear-gradient(to bottom right, teal, cyan, orange, yellow);
   
@@ -42,6 +45,12 @@ h1 {
 
 
 
-
-
+.btn-info{
+  background-color: yellow;
+  color:magenta;
+}
+.btn-warning{
+  background-color:magenta;
+  color:yellow;
+}
 

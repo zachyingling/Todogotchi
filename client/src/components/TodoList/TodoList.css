@@ -9,12 +9,14 @@
 
 }
 
+
+
 .todoaddsbutton {
     border-radius:50%;
-    background-color: mediumseagreen;
-    text-shadow: -5px 5px 0 mediumseagreen;
+    background-color: cyan;
+    text-shadow: -2px 2px 1.4px cyan;
 
-    color: white;
+    color: magenta;
     
 
 }
@@ -77,6 +79,7 @@
     right: 0;
     border-radius:30%;
     position: center;
+    float:right;
      
     
 }

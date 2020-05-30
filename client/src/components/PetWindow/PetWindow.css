@@ -20,10 +20,10 @@
     color: magenta;
     /* text-shadow: -2px 2px 0 rgba(255,255,0,1); */
     
-    filter:blur(3px) invert(100%);
+    filter:invert(100%);
     /* background-image: url("/petz.gif"); */
-    height: 86%;
-    width:86%;
+    height: 72%;
+    width: 72%;
     transition: 1s;
     transition-delay: 5ms;
     animation: animate 2.4s ease-in-out;
@@ -31,8 +31,8 @@
 }
 .fancy:hover {
     filter:blur(0px); 
-  height: 86%;
-  width:86%;
+  height: 50%;
+  width:50%;
 }
 
 
