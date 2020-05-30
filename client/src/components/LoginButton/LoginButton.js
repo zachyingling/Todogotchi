@@ -3,6 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import "../LoginButton/LoginButton.css"
 
 
+
 function HowToPlay () {
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
@@ -10,7 +11,7 @@ function HowToPlay () {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="warning" onClick={handleShow}>
         Login Help
       </Button>
 

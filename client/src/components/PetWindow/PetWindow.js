@@ -16,6 +16,9 @@ import API from "../utils/API";
 import "./PetWindow.css";
 
 
+// part of sound test
+// import upAudio from "../../sounds/up-todogotchi.mp3";
+
 
 class PetWindow extends Component {
 
@@ -404,7 +407,12 @@ class PetWindow extends Component {
 
     // };
 
+        //test for upAudio
+        // upAudio
+        // let upAudio = new Audio(upAudio);
 
+
+        
 
 
     render() {
@@ -473,6 +481,7 @@ class PetWindow extends Component {
                                     <button className="btn btn-primary rounded-circle petButton"
                                         onClick={() => {
                                             this.decrementEnergy();
+                                            // this.upAudio();
                                             // this.incrementHappiness();
                                         }}>
                                         Pet
