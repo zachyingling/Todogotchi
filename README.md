@@ -22,4 +22,4 @@ Todogotchi is our final project for the UPenn Full-Stack Coding Bootcamp. The pr
 ### Deployment
 
 Our Heroku deployment can be found [here](http://todogotchi.tech/home).
-The minigame's code can be found [here](https://benmulhollandpsl.github.io/todogotfree/).
+The minigame's code can be found [in this repo](https://benmulhollandpsl.github.io/todogotfree/).
