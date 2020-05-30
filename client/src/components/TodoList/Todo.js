@@ -1,6 +1,7 @@
 import React from 'react';
+import "./TodoList.css";
 export default props => (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "right" }}>
       <div
         style={{
           textDecoration: props.todo.complete ? "line-through" : ""
@@ -9,8 +10,8 @@ export default props => (
       >
         {props.todo.listItem}
       </div>
-      <button onClick={props.completeTodo}>✓</button>
-      <button onClick={props.onDelete}>x</button>
+      <button class="checkmarkandx" onClick={props.completeTodo}>✓</button>
+      <button class="checkmarkandx" onClick={props.onDelete}>x</button>
     </div>
   );
 

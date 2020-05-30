@@ -1,6 +1,7 @@
 import React from 'react';
 import shortid from 'shortid';
 import API from '../utils/API';
+import "./TodoList.css";
 export default class TodoList extends React.Component {
     state = {
         text: "",
@@ -92,7 +93,7 @@ export default class TodoList extends React.Component {
             onChange={this.handleChange} 
             placeholder= "Todo List" 
         />
-        <button onClick={this.handleSubmit}>add todo</button>
+        <button type="button" class="btn btn-info todoaddsbutton" onClick={this.handleSubmit}>add ToDo</button>
         </form>
     );
     }

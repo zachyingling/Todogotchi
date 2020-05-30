@@ -1,6 +1,9 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
+
 import "../HowToPlay/howtoplay.css"
+
+import "../TodoList/TodoList.css";
 
 
 function HowToPlay () {
@@ -10,7 +13,7 @@ function HowToPlay () {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button class="secondfancy" variant="warning" onClick={handleShow}>
         How To Play
       </Button>
 
